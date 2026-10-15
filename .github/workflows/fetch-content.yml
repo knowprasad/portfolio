@@ -7,23 +7,49 @@ on:
     - cron: "0 */6 * * *" # every 6 hours
   workflow_dispatch: # manual trigger
 
+permissions:
+  contents: write
+
 jobs:
   fetch:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: "22"
+          node-version-file: ".nvmrc"
           cache: "npm"
+
+      - name: Validate Notion configuration
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          NOTION_PROP_PUBLISHED: ${{ vars.NOTION_PROP_PUBLISHED }}
+          NOTION_PROP_DATE: ${{ vars.NOTION_PROP_DATE }}
+          NOTION_PROP_TITLE: ${{ vars.NOTION_PROP_TITLE }}
+          NOTION_PROP_SLUG: ${{ vars.NOTION_PROP_SLUG }}
+          NOTION_PROP_EXCERPT: ${{ vars.NOTION_PROP_EXCERPT }}
+          NOTION_PROP_TAGS: ${{ vars.NOTION_PROP_TAGS }}
+        run: |
+          set -euo pipefail
+          missing=()
+          [[ -n "${NOTION_TOKEN:-}" ]] || missing+=(NOTION_TOKEN)
+          [[ -n "${NOTION_DATABASE_ID:-}" ]] || missing+=(NOTION_DATABASE_ID)
+
+          if (( ${#missing[@]} > 0 )); then
+            echo "::error title=Missing GitHub Actions secrets::Configure these repository secrets: ${missing[*]}"
+            exit 1
+          fi
+
+          echo "Required Notion secrets are present."
 
       - run: npm ci
 
       - name: Fetch Notion content
-        run: npx tsx scripts/fetch-notion.ts
+        run: npm run fetch-content
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}

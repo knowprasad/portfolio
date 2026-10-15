@@ -7,36 +7,80 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 // --- Config ---
-const NOTION_TOKEN = process.env.NOTION_TOKEN;
-const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID;
+const NOTION_TOKEN = process.env.NOTION_TOKEN?.trim();
+const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID?.trim();
 
 // Property name overrides (case-sensitive for Notion API filters).
 // Set these to match the exact names in your Notion database.
 // The Getters below use these values with case-insensitive matching.
-const PROP_PUBLISHED = process.env.NOTION_PROP_PUBLISHED ?? "published";
-const PROP_DATE = process.env.NOTION_PROP_DATE ?? "post date";
-const PROP_TITLE = process.env.NOTION_PROP_TITLE ?? "Name";   // fallback to "Title" too
-const PROP_SLUG = process.env.NOTION_PROP_SLUG ?? "Slug";
-const PROP_EXCERPT = process.env.NOTION_PROP_EXCERPT ?? "Excerpt";
-const PROP_TAGS = process.env.NOTION_PROP_TAGS ?? "Tags";
+const PROP_PUBLISHED = process.env.NOTION_PROP_PUBLISHED?.trim() || "published";
+const PROP_DATE = process.env.NOTION_PROP_DATE?.trim() || "post date";
+const PROP_TITLE = process.env.NOTION_PROP_TITLE?.trim() || "Name"; // fallback to "Title" too
+const PROP_SLUG = process.env.NOTION_PROP_SLUG?.trim() || "Slug";
+const PROP_EXCERPT = process.env.NOTION_PROP_EXCERPT?.trim() || "Excerpt";
+const PROP_TAGS = process.env.NOTION_PROP_TAGS?.trim() || "Tags";
 
-if (!NOTION_TOKEN) {
-  console.error("ERROR: NOTION_TOKEN environment variable is not set.");
-  console.error("Add it to your .env file or export it in your shell.");
-  process.exit(1);
+function getErrorDetails(err: unknown): {
+  status?: number;
+  code?: string;
+  message: string;
+} {
+  if (err instanceof Error) {
+    const apiError = err as Error & {
+      status?: number;
+      code?: string;
+      body?: { code?: string; message?: string };
+    };
+    return {
+      status: apiError.status,
+      code: apiError.code ?? apiError.body?.code,
+      message: apiError.body?.message ?? apiError.message,
+    };
+  }
+
+  return { message: String(err) };
 }
-if (!NOTION_DATABASE_ID) {
-  console.error("ERROR: NOTION_DATABASE_ID environment variable is not set.");
-  console.error("Add it to your .env file or export it in your shell.");
-  process.exit(1);
+
+function formatError(err: unknown): string {
+  const details = getErrorDetails(err);
+  const prefix = [
+    details.status ? `HTTP ${details.status}` : null,
+    details.code ?? null,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return prefix ? `${prefix}: ${details.message}` : details.message;
+}
+
+function isNotFoundError(err: unknown): boolean {
+  const details = getErrorDetails(err);
+  return details.status === 404 || details.code === "object_not_found";
+}
+
+function getConfig(): { token: string; databaseId: string } {
+  const token = NOTION_TOKEN;
+  const databaseId = NOTION_DATABASE_ID;
+  const missing = [
+    !token ? "NOTION_TOKEN" : null,
+    !databaseId ? "NOTION_DATABASE_ID" : null,
+  ].filter((name): name is string => Boolean(name));
+
+  if (missing.length > 0) {
+    throw new Error(
+      `Configuration error: missing ${missing.join(" and ")}. Set the required environment variable(s) before running the Notion sync.`,
+    );
+  }
+
+  return { token: token!, databaseId: databaseId! };
 }
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const BLOG_DIR = join(__dirname, "..", "src", "content", "blog");
 
 // --- Notion client setup ---
-const notion = new Client({ auth: NOTION_TOKEN });
-const n2m = new NotionToMarkdown({ notionClient: notion });
+let notion: Client;
+let n2m: NotionToMarkdown;
 
 // --- Types ---
 interface NotionProperties {
@@ -84,6 +128,10 @@ function slugify(text: string): string {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 }
 
+function yamlString(value: string): string {
+  return JSON.stringify(value);
+}
+
 function hashContent(content: string): string {
   return createHash("sha256").update(content).digest("hex").slice(0, 12);
 }
@@ -96,55 +144,89 @@ function buildMdx(
 ): string {
   const tagsStr =
     tags.length > 0
-      ? `[${tags.map((t) => `"${t.replace(/"/g, '\\"')}"`).join(", ")}]`
+      ? `[${tags.map(yamlString).join(", ")}]`
       : "[]";
 
   return `---
-title: "${title.replace(/"/g, '\\"')}"
+title: ${yamlString(title)}
 date: ${date}
 tags: ${tagsStr}
-excerpt: "${excerpt.replace(/"/g, '\\"')}"
+excerpt: ${yamlString(excerpt)}
 draft: false
 ---
 
 ${body.trim()}
 `;
 }
+async function resolveDataSourceId(databaseId: string): Promise<string> {
+  console.log("🔍 Resolving Notion database...");
+
+  try {
+    const db = await notion.databases.retrieve({ database_id: databaseId });
+    const dataSources = (
+      db as { data_sources?: Array<{ id?: string }> }
+    ).data_sources;
+    const dataSourceId = dataSources?.find((source) => source.id)?.id;
+
+    if (dataSourceId) {
+      console.log("   Found a data source for the database.");
+      return dataSourceId;
+    }
+
+    console.log("   No data source was listed; using the configured ID directly.");
+    return databaseId;
+  } catch (err) {
+    if (isNotFoundError(err)) {
+      console.log("   ID is not exposed as a database; trying it as a data source ID.");
+      return databaseId;
+    }
+
+    throw new Error(`Unable to retrieve the configured Notion database: ${formatError(err)}`);
+  }
+}
+
+async function queryPublishedPages(dataSourceId: string) {
+  const pages: Array<{ id: string; properties: NotionProperties }> = [];
+  let startCursor: string | undefined;
+
+  do {
+    const response = await notion.dataSources.query({
+      data_source_id: dataSourceId,
+      filter: {
+        property: PROP_PUBLISHED,
+        checkbox: { equals: true },
+      },
+      sorts: [{ property: PROP_DATE, direction: "descending" }],
+      ...(startCursor ? { start_cursor: startCursor } : {}),
+    });
+
+    pages.push(
+      ...(response.results as Array<{ id: string; properties: NotionProperties }>),
+    );
+    startCursor = response.has_more ? response.next_cursor ?? undefined : undefined;
+  } while (startCursor);
+
+  return pages;
+}
+
 // --- Main ---
 async function main() {
+  const { token, databaseId } = getConfig();
+  notion = new Client({ auth: token });
+  n2m = new NotionToMarkdown({ notionClient: notion });
   await mkdir(BLOG_DIR, { recursive: true });
 
-  // 1. Resolve data source ID
-  // The NOTION_DATABASE_ID from the URL may be a database ID or data source ID.
-  // We try to retrieve it as a database first; if that works, grab the first
-  // data source. Otherwise fall back to using it directly as data_source_id.
-  console.log("🔍 Resolving Notion database...");
-  let dataSourceId = NOTION_DATABASE_ID!;
-  try {
-    const db = await notion.databases.retrieve({ database_id: NOTION_DATABASE_ID! });
-    const ds = (db as any).data_sources?.[0]?.id;
-    if (ds) {
-      dataSourceId = ds;
-      console.log(`   Found data source: ${dataSourceId}`);
-    } else {
-      console.log(`   No data sources found, using database ID as data source ID`);
-    }
-  } catch {
-    console.log(`   Not a database ID, treating as data source ID directly`);
-  }
-
-  // 2. Query published pages
+  // 1. Resolve data source ID and query all published pages.
+  const dataSourceId = await resolveDataSourceId(databaseId);
   console.log("🔍 Querying published pages...");
-  const response = await notion.dataSources.query({
-    data_source_id: dataSourceId,
-    filter: {
-      property: PROP_PUBLISHED,
-      checkbox: { equals: true },
-    },
-    sorts: [{ property: PROP_DATE, direction: "descending" }],
-  });
-
-  const pages = response.results;
+  let pages: Array<{ id: string; properties: NotionProperties }>;
+  try {
+    pages = await queryPublishedPages(dataSourceId);
+  } catch (err) {
+    throw new Error(
+      `Unable to query published Notion pages. Check database access and property names (${PROP_PUBLISHED}, ${PROP_DATE}): ${formatError(err)}`,
+    );
+  }
   console.log(`   Found ${pages.length} published page(s).\n`);
 
   let newCount = 0;
@@ -176,6 +258,12 @@ async function main() {
     if (!slug) {
       slug = slugify(title);
       console.log(`   ℹ  "${title}" — no slug set, generated: "${slug}"`);
+    }
+    slug = slugify(slug);
+    if (!slug) {
+      console.warn(`   ⚠  SKIP "${title}": slug is empty after normalization`);
+      skippedCount++;
+      continue;
     }
 
     console.log(`   📄 "${title}" → ${slug}.mdx`);
@@ -238,6 +326,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error("\n❌ FATAL:", err instanceof Error ? err.message : err);
+  console.error(`\n❌ FATAL: ${formatError(err)}`);
   process.exit(1);
 });

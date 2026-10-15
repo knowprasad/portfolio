@@ -8,8 +8,10 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "test": "npm run build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "fetch-content": "tsx scripts/fetch-notion.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
