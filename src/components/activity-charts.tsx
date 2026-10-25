@@ -1,0 +1,39 @@
+'use client';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { ChartBar, GithubLogo, GridFour, ArrowUpRight, Trophy, Code } from '@/components/icons';
+import { monthlySubmissions } from '@/lib/activity-metrics';
+import type { GithubActivity, LeetcodeActivity } from '@/lib/activity';
+
+const dateLabel = (date: string) => new Date(`${date.slice(0, 10)}T12:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+
+export function ContributionCalendar({ data }: { data: GithubActivity }) {
+  const [view, setView] = useState<'grid' | 'skyline'>('grid');
+  const [selected, setSelected] = useState<string | null>(null);
+  const scroll = useRef<HTMLDivElement>(null);
+  useEffect(() => { const element = scroll.current; if (element) element.scrollLeft = element.scrollWidth; }, []);
+  const day = data.days.find(item => item.date === selected);
+  const months = new Map<string, number>();
+  data.days.forEach((item, index) => { const month = item.date.slice(0, 7); if (!months.has(month)) months.set(month, Math.floor(index / 7)); });
+  const monthTotals = [...months.keys()].map(month => ({ month, count: data.days.filter(d => d.date.startsWith(month)).reduce((sum, d) => sum + d.count, 0) }));
+  const max = Math.max(...monthTotals.map(m => m.count), 1);
+  return <div className="activity-panel"><div className="activity-top"><span><strong>{data.total.toLocaleString()}</strong> contributions in the last year</span><div className="chart-switch" aria-label="Activity visualization"><button aria-label="Contribution grid" aria-pressed={view === 'grid'} onClick={() => setView('grid')}><GridFour size={15} /></button><button aria-label="Monthly skyline" aria-pressed={view === 'skyline'} onClick={() => setView('skyline')}><ChartBar size={15} /></button></div></div>
+    {view === 'grid' ? <div className="calendar-scroll" ref={scroll}><div className="calendar-inner"><div className="calendar-months">{[...new Map([...months].map(([month, col]) => [col, month]))].map(([col, month]) => <span key={month} style={{ gridColumn: col + 1 }}>{new Date(`${month}-15`).toLocaleDateString('en-US', { month: 'short' })}</span>)}</div><div className="contribution-grid" aria-label="GitHub daily contributions">{data.days.map(item => <button key={item.date} className={`contribution-cell level-${item.level}${selected === item.date ? ' selected' : ''}`} title={`${dateLabel(item.date)}: ${item.count} contributions`} aria-label={`${item.count} contributions on ${dateLabel(item.date)}`} aria-pressed={selected === item.date} onClick={() => setSelected(item.date)} />)}</div></div></div> : <div className="skyline" aria-label="Monthly GitHub contributions">{monthTotals.map(item => <div className="skyline-column" key={item.month}><span className="bar-count">{item.count}</span><div className="skyline-bar" style={{ '--bar-height': `${Math.max(item.count / max * 115, 3)}px` } as CSSProperties} title={`${item.month}: ${item.count} contributions`} /><span>{new Date(`${item.month}-15`).toLocaleDateString('en-US', { month: 'short' })}</span></div>)}</div>}
+    <div className="calendar-caption"><span aria-live="polite">{day ? `${dateLabel(day.date)} · ${day.count} contributions` : 'Each little square is a day of showing up.'}</span><div className="calendar-legend" aria-label="Contribution intensity from less to more"><span>Less</span>{[0, 1, 2, 3, 4].map(level => <i className={`level-${level}`} key={level} />)}<span>More</span></div></div><p className="data-date">{data.source === 'snapshot' ? 'Saved public snapshot' : 'Checked'} · {dateLabel(data.fetchedAt)} · <a href="https://github.com/knowprasad" target="_blank" rel="noreferrer">GitHub ↗</a></p>
+  </div>;
+}
+
+export function CompetitiveProgramming({ data }: { data: LeetcodeActivity }) {
+  const [view, setView] = useState<'activity' | 'rating'>('activity');
+  const months = monthlySubmissions(data.submissions);
+  const max = Math.max(...months.map(m => m.count), 1);
+  const ratings = data.contests.map(c => c.rating);
+  const low = Math.min(...ratings) - 30, high = Math.max(...ratings) + 30;
+  const points = data.contests.map((c, index) => `${15 + index / Math.max(data.contests.length - 1, 1) * 570},${145 - (c.rating - low) / (high - low) * 120}`).join(' ');
+  return <div className="cp-panel"><div className="cp-stats"><div><Code size={17} /><strong>{data.solved}</strong><span>Problems solved</span></div><div><ChartBar size={17} /><strong>{data.activeDays ?? '—'}</strong><span>Active days</span></div><div><Trophy size={17} /><strong>{data.rating ?? data.streak ?? '—'}</strong><span>{data.rating !== null ? 'Contest rating' : 'Longest streak'}</span></div></div>
+    <div className="chart-title"><div className="text-tabs"><button aria-pressed={view === 'activity'} onClick={() => setView('activity')}>Submission activity</button><button aria-pressed={view === 'rating'} onClick={() => setView('rating')}>Contest rating</button></div><span className="source-tag">LeetCode</span></div>
+    {view === 'activity' ? <div className="submission-chart" role="img" aria-label={`LeetCode submissions by month: ${months.map(m => `${m.month}, ${m.count}`).join('; ')}`}><div className="chart-gridlines" aria-hidden="true"><i /><i /><i /></div><div className="submission-bars">{months.map(item => <div className="submission-column" key={item.month}><span>{item.count}</span><div style={{ height: `${Math.max(item.count / max * 110, 3)}px` }} title={`${item.month}: ${item.count} submissions`} /><small>{new Date(`${item.month}-15`).toLocaleDateString('en-US', { month: 'short' })}</small></div>)}</div><span className="chart-unit">Submissions, including repeat attempts</span></div> : data.contests.length ? <div className="rating-chart"><svg viewBox="0 0 600 170" role="img" aria-label={`Rating history across ${data.contests.length} contests`}><polyline points={points} fill="none" stroke="currentColor" strokeWidth="2" />{data.contests.map((c, i) => <circle key={c.date} cx={15 + i / Math.max(data.contests.length - 1, 1) * 570} cy={145 - (c.rating - low) / (high - low) * 120} r="3"><title>{c.title}: {c.rating}</title></circle>)}</svg><p className="data-date">{data.contests[0]?.rating} → {data.contests.at(-1)?.rating}</p></div> : <div className="chart-empty"><Trophy size={25} /><p>The first rated contest is still ahead.</p><span>No contest-rating history returned by LeetCode.</span></div>}
+    <div className="solved-breakdown"><div className="solved-ring" style={{ '--easy-end': `${data.easy / Math.max(data.solved, 1) * 100}%`, '--medium-end': `${(data.easy + data.medium) / Math.max(data.solved, 1) * 100}%` } as CSSProperties}><span><strong>{data.solved}</strong><small>Solved</small></span></div><div className="difficulty-list">{[['Easy', data.easy, 'easy'], ['Medium', data.medium, 'medium'], ['Hard', data.hard, 'hard']].map(([label, count, key]) => <div key={key}><span><i className={`difficulty-dot ${key}`} />{label}</span><strong>{count}</strong></div>)}</div></div>
+    {data.contests.length > 0 && <div className="contest-list"><h3>Recent contests</h3>{data.contests.slice(-3).reverse().map(contest => <div key={contest.date}><strong>#{contest.rank.toLocaleString()}</strong><span>{contest.title}</span><small>{contest.solved}/{contest.total} solved</small></div>)}</div>}
+    <div className="cp-footer"><a className="text-link" href="https://leetcode.com/u/knowprasad/" target="_blank" rel="noreferrer">LeetCode profile <ArrowUpRight size={12} /></a><a className="text-link" href="https://github.com/knowprasad/Codeforces-Solutions" target="_blank" rel="noreferrer"><GithubLogo size={13} />Solutions</a></div><p className="data-date">{data.source === 'snapshot' ? 'Saved public snapshot' : 'Checked'} · {dateLabel(data.fetchedAt)}</p>
+  </div>;
+}

@@ -1,0 +1,250 @@
+{
+  "open": {
+    "count": 16,
+    "fetchedAt": "2026-10-25T02:00:08.2052299+00:00",
+    "source": "snapshot",
+    "available": true,
+    "items": [
+      {
+        "title": "Support normalization and type safety in format_isrc and valid_isrc",
+        "url": "https://github.com/metabrainz/picard/pull/3532",
+        "repository": "metabrainz/picard",
+        "date": "2026-10-24T22:00:09Z",
+        "number": 3532,
+        "state": "open"
+      },
+      {
+        "title": "fix(cli): surface policy validation warnings in kyverno apply",
+        "url": "https://github.com/kyverno/kyverno/pull/18104",
+        "repository": "kyverno/kyverno",
+        "date": "2026-10-24T19:08:31Z",
+        "number": 18104,
+        "state": "open"
+      },
+      {
+        "title": "Fix webhook signature validation crashes on malformed headers",
+        "url": "https://github.com/CCExtractor/sample-platform/pull/1245",
+        "repository": "CCExtractor/sample-platform",
+        "date": "2026-10-24T17:17:03Z",
+        "number": 1245,
+        "state": "open"
+      },
+      {
+        "title": "minecode: deduplicate mine_cargo and mine_crates pipelines (#901)",
+        "url": "https://github.com/aboutcode-org/purldb/pull/918",
+        "repository": "aboutcode-org/purldb",
+        "date": "2026-10-24T16:57:31Z",
+        "number": 918,
+        "state": "open"
+      },
+      {
+        "title": "feat(blueprints): add PostgreSQL unused index bloat and storage reclamation guard",
+        "url": "https://github.com/kestra-io/blueprints/pull/4821",
+        "repository": "kestra-io/blueprints",
+        "date": "2026-10-24T14:37:21Z",
+        "number": 4821,
+        "state": "open"
+      },
+      {
+        "title": "fix(models): move Grade.to_csv before private modifier (#8080)",
+        "url": "https://github.com/CircuitVerse/CircuitVerse/pull/8089",
+        "repository": "CircuitVerse/CircuitVerse",
+        "date": "2026-10-24T14:27:39Z",
+        "number": 8089,
+        "state": "open"
+      },
+      {
+        "title": "W3CBaggagePropagator: support multiple baggage headers in extract",
+        "url": "https://github.com/open-telemetry/opentelemetry-python/pull/5814",
+        "repository": "open-telemetry/opentelemetry-python",
+        "date": "2026-10-24T14:11:52Z",
+        "number": 5814,
+        "state": "open"
+      },
+      {
+        "title": "feat(kv): add optional expectedRevision for conditional writes and deletes",
+        "url": "https://github.com/kestra-io/plugin-nats/pull/193",
+        "repository": "kestra-io/plugin-nats",
+        "date": "2026-10-22T10:07:38Z",
+        "number": 193,
+        "state": "open"
+      }
+    ]
+  },
+  "merged": {
+    "count": 15,
+    "fetchedAt": "2026-10-25T02:00:08.2052299+00:00",
+    "source": "snapshot",
+    "available": true,
+    "items": [
+      {
+        "title": "geometry: direct symbolic formulas for Plane.distance",
+        "url": "https://github.com/sympy/sympy/pull/30827",
+        "repository": "sympy/sympy",
+        "date": "2026-10-24T20:17:43Z",
+        "number": 30827,
+        "state": "merged"
+      },
+      {
+        "title": "feat(blueprints): add PostgreSQL pg_stat_statements query performance and cache efficiency guard",
+        "url": "https://github.com/kestra-io/blueprints/pull/4792",
+        "repository": "kestra-io/blueprints",
+        "date": "2026-10-23T14:05:33Z",
+        "number": 4792,
+        "state": "merged"
+      },
+      {
+        "title": "assumptions: use fuzzy_or in Mul._eval_real_imag",
+        "url": "https://github.com/sympy/sympy/pull/30808",
+        "repository": "sympy/sympy",
+        "date": "2026-10-23T06:15:31Z",
+        "number": 30808,
+        "state": "merged"
+      },
+      {
+        "title": "matrices: use _pinv_full_rank directly for vectors in _pinv_rank_decomposition",
+        "url": "https://github.com/sympy/sympy/pull/30780",
+        "repository": "sympy/sympy",
+        "date": "2026-10-21T19:57:42Z",
+        "number": 30780,
+        "state": "merged"
+      },
+      {
+        "title": "Fix greedy regex in Prometheus exporter unit annotation stripping",
+        "url": "https://github.com/open-telemetry/opentelemetry-python/pull/5798",
+        "repository": "open-telemetry/opentelemetry-python",
+        "date": "2026-10-21T17:00:25Z",
+        "number": 5798,
+        "state": "merged"
+      },
+      {
+        "title": "feat(blueprints): add Supabase Database Health and Storage Quota Sentinel",
+        "url": "https://github.com/kestra-io/blueprints/pull/3430",
+        "repository": "kestra-io/blueprints",
+        "date": "2026-10-19T07:43:44Z",
+        "number": 3430,
+        "state": "merged"
+      },
+      {
+        "title": "feat(blueprints): add Neon Branch Lifecycle And Compute Sentinel",
+        "url": "https://github.com/kestra-io/blueprints/pull/3431",
+        "repository": "kestra-io/blueprints",
+        "date": "2026-10-19T07:43:25Z",
+        "number": 3431,
+        "state": "merged"
+      },
+      {
+        "title": "feat(blueprints): add Cloudflare R2 Lifecycle Compaction And Cost Guard",
+        "url": "https://github.com/kestra-io/blueprints/pull/4317",
+        "repository": "kestra-io/blueprints",
+        "date": "2026-10-19T13:24:09Z",
+        "number": 4317,
+        "state": "merged"
+      }
+    ]
+  },
+  "closed": {
+    "count": 12,
+    "fetchedAt": "2026-10-25T02:00:08.2052299+00:00",
+    "source": "snapshot",
+    "available": true,
+    "items": [
+      {
+        "title": "core: fix URL target base path leakage and IPv6 parsing (#1803)",
+        "url": "https://github.com/OWASP/Nettacker/pull/1804",
+        "repository": "OWASP/Nettacker",
+        "date": "2026-10-24T17:07:56Z",
+        "number": 1804,
+        "state": "closed"
+      },
+      {
+        "title": "feat(blueprints): add PostgreSQL pg_stat_statements query performance and cache efficiency guard",
+        "url": "https://github.com/kestra-io/blueprints/pull/4772",
+        "repository": "kestra-io/blueprints",
+        "date": "2026-10-22T12:39:42Z",
+        "number": 4772,
+        "state": "closed"
+      },
+      {
+        "title": "feat(blueprints): add AWS ECR untagged image retention and storage reclaim guard",
+        "url": "https://github.com/kestra-io/blueprints/pull/4724",
+        "repository": "kestra-io/blueprints",
+        "date": "2026-10-22T08:05:56Z",
+        "number": 4724,
+        "state": "closed"
+      },
+      {
+        "title": "fix(executions): replace Bootstrap utility classes in Restart.vue",
+        "url": "https://github.com/kestra-io/kestra/pull/21342",
+        "repository": "kestra-io/kestra",
+        "date": "2026-10-21T13:18:04Z",
+        "number": 21342,
+        "state": "closed"
+      },
+      {
+        "title": "feat(blueprints): add Turso Database Ephemeral Branch Cleanup and Storage Guard",
+        "url": "https://github.com/kestra-io/blueprints/pull/4641",
+        "repository": "kestra-io/blueprints",
+        "date": "2026-10-21T10:04:01Z",
+        "number": 4641,
+        "state": "closed"
+      },
+      {
+        "title": "feat(blueprints): add Cloudflare R2 Lifecycle Compaction And Cost Guard",
+        "url": "https://github.com/kestra-io/blueprints/pull/4308",
+        "repository": "kestra-io/blueprints",
+        "date": "2026-10-21T06:03:37Z",
+        "number": 4308,
+        "state": "closed"
+      },
+      {
+        "title": "feat(blueprints): add Cloudflare R2 Lifecycle Compaction And Cost Guard",
+        "url": "https://github.com/kestra-io/blueprints/pull/4319",
+        "repository": "kestra-io/blueprints",
+        "date": "2026-10-21T06:03:25Z",
+        "number": 4319,
+        "state": "closed"
+      },
+      {
+        "title": "feat(blueprints): add Sentry Error Burst and Release Health Sentinel",
+        "url": "https://github.com/kestra-io/blueprints/pull/4580",
+        "repository": "kestra-io/blueprints",
+        "date": "2026-10-21T05:58:59Z",
+        "number": 4580,
+        "state": "closed"
+      }
+    ]
+  },
+  "reviewed": {
+    "count": 3,
+    "fetchedAt": "2026-10-25T02:00:08.2052299+00:00",
+    "source": "snapshot",
+    "available": true,
+    "items": [
+      {
+        "title": "Add simplify() type hints for matrices",
+        "url": "https://github.com/sympy/sympy/pull/30834",
+        "repository": "sympy/sympy",
+        "date": "2026-10-24T21:33:12Z",
+        "number": 30834,
+        "state": "reviewed"
+      },
+      {
+        "title": "fix(sdk): exact-match the View unit selection criterion",
+        "url": "https://github.com/open-telemetry/opentelemetry-python/pull/5816",
+        "repository": "open-telemetry/opentelemetry-python",
+        "date": "2026-10-24T18:54:56Z",
+        "number": 5816,
+        "state": "reviewed"
+      },
+      {
+        "title": "Fix npm sync comparing package names with PURLs",
+        "url": "https://github.com/aboutcode-org/purldb/pull/911",
+        "repository": "aboutcode-org/purldb",
+        "date": "2026-10-24T18:42:30Z",
+        "number": 911,
+        "state": "reviewed"
+      }
+    ]
+  }
+}

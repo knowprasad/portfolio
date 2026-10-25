@@ -25,3 +25,25 @@ pnpm-debug.log*
 
 # graphify knowledge graph
 graphify-out/
+
+# firecrawl research artifacts
+.firecrawl/
+
+# new application and verification artifacts
+.env.*
+!.env.example
+.next/
+out/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+.vercel
+.env*
+!.env.example
+
+# Keep raw reference captures and private research local.
+references/*
+!references/IMPLEMENTATION-AUDIT.md
+!references/MOBILE-PERFORMANCE-AUDIT.md
+!references/HANDOVER-CHECKLIST.md

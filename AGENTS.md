@@ -1,30 +1,22 @@
-# Repository agent instructions
+# Portfolio agent instructions
 
-## Project
+The approved rebuild uses Next.js App Router, React, TypeScript and npm. Read PRODUCT.md and prd.md for product decisions. The old Astro app was deliberately removed.
 
-- This is an Astro 5 portfolio site using TypeScript, content collections, and npm.
-- Read `CLAUDE.md` before changing project conventions; keep its background-dev-server rule.
-- Keep generated blog content under `src/content/blog/` compatible with the collection schema in `src/content/config.ts`.
+- Keep public content server-rendered; isolate interactive client components.
+- Read CLAUDE.md for background-server operation. Commands live in package.json.
+- Runtime source belongs in src/. Research and disposable previews stay under references/, outside production bundles.
+- Query the existing Graphify graph for focused architecture questions; rebuild against src/ after source changes. Exclude raw reference captures.
+- Never invent personal achievements, posts, ratings or activity. Distinguish unavailable data from zero; dated verified public snapshots may be used during failures.
+- Keep server tokens out of browser bundles and logs. Notion must publish only approved entries once connected.
+- Preserve unrelated edits. No commits or pushes unless requested. Day-one Vercel deployment and free-tier services are authorized; ask before paid upgrades.
+- Run meaningful tests, typecheck, lint and production build for application changes. Inspect the diff and verify relevant browser flows before handoff.
 
-## Commands
+<!-- BEGIN:nextjs-agent-rules -->
 
-- Install: `npm ci`
-- Build: `npm run build`
-- Test: `npm test`
-- Dev server: `astro dev --background`
-- Manage the background server: `astro dev status`, `astro dev logs`, `astro dev stop`
-- Notion sync: `npm run fetch-content`
+## This is NOT the Next.js you know
 
-There is no dedicated lint or typecheck script. `npm test` runs the production build as the offline regression check; report any missing external credentials or services separately.
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
 
-## Content sync
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
-- The Notion sync needs `NOTION_TOKEN` and `NOTION_DATABASE_ID`; use `.env.example` as the variable reference.
-- Never print or commit token values. The Notion database must be shared with the integration.
-- Preserve the existing Notion property override variables and generated-file format when changing the sync.
-
-## Change safety
-
-- Make focused edits and preserve unrelated working-tree changes.
-- Do not commit, push, or alter deployment/account settings unless explicitly requested.
-- Before finishing, inspect `git diff` and run the smallest meaningful project check.
+<!-- END:nextjs-agent-rules -->

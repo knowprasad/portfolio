@@ -1,0 +1,38 @@
+{
+  "DoraGlinderzaldosh": {
+    "kind": "User",
+    "login": "DoraGlinderzaldosh",
+    "avatar": "https://avatars.githubusercontent.com/u/183134603?v=4",
+    "url": "https://github.com/DoraGlinderzaldosh"
+  },
+  "firstcontributions": {
+    "kind": "Organization",
+    "login": "firstcontributions",
+    "avatar": "https://avatars.githubusercontent.com/u/37713493?v=4",
+    "url": "https://github.com/firstcontributions"
+  },
+  "sympy": {
+    "kind": "Organization",
+    "login": "sympy",
+    "avatar": "https://avatars.githubusercontent.com/u/260832?v=4",
+    "url": "https://github.com/sympy"
+  },
+  "open-telemetry": {
+    "kind": "Organization",
+    "login": "open-telemetry",
+    "avatar": "https://avatars.githubusercontent.com/u/49998002?v=4",
+    "url": "https://github.com/open-telemetry"
+  },
+  "kestra-io": {
+    "kind": "Organization",
+    "login": "kestra-io",
+    "avatar": "https://avatars.githubusercontent.com/u/59033362?v=4",
+    "url": "https://github.com/kestra-io"
+  },
+  "abhisheknaiidu": {
+    "kind": "User",
+    "login": "abhisheknaiidu",
+    "avatar": "https://avatars.githubusercontent.com/u/55599878?v=4",
+    "url": "https://github.com/abhisheknaiidu"
+  }
+}

@@ -1,37 +1,40 @@
 {
-  "name": "portfolio",
-  "type": "module",
-  "version": "0.0.1",
-  "engines": {
-    "node": ">=22.12.0"
-  },
+  "name": "shubham-portfolio",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "test": "npm run build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "fetch-content": "tsx scripts/fetch-notion.ts"
+    "dev": "next dev --hostname 127.0.0.1 --port 3001",
+    "build": "next build --webpack",
+    "start": "next start --hostname 127.0.0.1 --port 3001",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check": "npm run lint && npm run typecheck && npm test && npm run build",
+    "security:audit": "npm audit"
+  },
+  "engines": {
+    "node": "24.x"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.14",
-    "@astrojs/rss": "^4.0.19",
-    "@astrojs/sitemap": "^3.7.4",
-    "@notionhq/client": "^5.26.0",
-    "@resvg/resvg-js": "^2.6.2",
-    "@tailwindcss/vite": "^4.3.3",
-    "astro": "^5.18.2",
-    "geist": "^1.7.2",
-    "notion-to-md": "^3.1.9",
-    "satori": "^0.33.4",
-    "tailwindcss": "^4.3.3",
-    "vite": "^8.2.2"
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.118.0",
+    "@tailwindcss/postcss": "4.3.3",
+    "fuse.js": "7.5.0",
+    "motion": "14.6.0",
+    "next": "16.4.3",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "server-only": "0.0.1",
+    "tailwindcss": "4.3.3",
+    "zod": "4.6.7"
   },
   "devDependencies": {
-    "tsx": "^4.19.0"
-  },
-  "allowScripts": {
-    "esbuild": true,
-    "sharp@0.34.5": true
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.3",
+    "typescript": "6.0.3",
+    "vitest": "5.0.5"
   }
 }

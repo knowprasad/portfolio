@@ -1,0 +1,10 @@
+references
+graphify-out
+test-results
+.firecrawl
+.git
+node_modules
+.next
+.env*
+*.md
+scripts
