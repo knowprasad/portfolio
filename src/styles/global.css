@@ -1,0 +1,132 @@
+@import 'tailwindcss';
+
+/* Self-hosted Geist font */
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/Geist-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('/fonts/GeistMono-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── DARK THEME (default) ─────────────────────────────────── */
+:root, [data-theme="dark"] {
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+
+  --bg:           #0a0a0c;
+  --surface:      #111114;
+  --surface-2:    #17171b;
+  --border:       #202025;
+  --border-hover: #31313a;
+  --text:         #f4f4f6;
+  --text-2:       #a3a3ad;
+  --muted:        #656570;
+  --accent:       #e5a93c;   /* warm refined amber */
+  --accent-dim:   rgba(229,169,60,0.09);
+  --accent2:      #7e9bb8;   /* quiet steel tone */
+  --accent2-dim:  rgba(126,155,184,0.10);
+  --chip:         #151518;
+  --chip-border:  #202025;
+  --header-bg:    rgba(10,10,12,0.85);
+  --shadow-card:  0 1px 3px rgba(0,0,0,0.4), 0 6px 20px rgba(0,0,0,0.25);
+  --shadow-hover: 0 2px 8px rgba(0,0,0,0.5), 0 12px 32px rgba(0,0,0,0.35);
+  --radius:       8px;
+}
+
+/* ─── LIGHT THEME ───────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg:           #fafafb;
+  --surface:      #ffffff;
+  --surface-2:    #f3f3f5;
+  --border:       #e5e5e9;
+  --border-hover: #d2d2d8;
+  --text:         #111113;
+  --text-2:       #555560;
+  --muted:        #787884;
+  --accent:       #b45309;
+  --accent-dim:   rgba(180,83,9,0.08);
+  --accent2:      #486581;
+  --accent2-dim:  rgba(72,101,129,0.08);
+  --chip:         #f1f1f4;
+  --chip-border:  #e4e4e8;
+  --header-bg:    rgba(250,250,251,0.88);
+  --shadow-card:  0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-hover: 0 2px 6px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06);
+  --radius:       8px;
+}
+
+/* Flash of wrong theme prevention */
+html { color-scheme: dark; }
+[data-theme="light"] { color-scheme: light; }
+
+/* Subtle accent ambient background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(1000px 500px at 50% -80px, var(--accent-dim), transparent 70%);
+}
+
+/* Selection */
+::selection {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* Focus ring */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Base reset & typography */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Restrained entrance reveals — clean, fast, zero lag */
+.rv {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.rv.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced motion gate */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .rv {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,37 @@
+# Security review
+
+Review date: 26 October 2026. Skills: VibeSec-Skill, security-review, Supabase/Postgres guidance. This is a focused application/dependency review, not a penetration-test certification.
+
+## Public reading and content
+
+Public Next.js pages use server rendering/ISR. The read-only Notion adapter queries only eight configured portfolio data sources and defensively excludes Draft, Archived and trashed pages. The owner-approved read-only publishing connection is configured; 35 existing records were approved for publication. Instructional personal-shelf, place, friend and article starters remain Draft. Queries and article bodies use five-minute caches. API requests use a fixed api.notion.com destination, reject redirects, time out, and retry bounded rate-limit responses. Only published records may authorize body retrieval. Search contains public content only; it is not workspace search.
+
+React escapes text. The article renderer supports selected native blocks and never renders arbitrary HTML, scripts, embeds, synced private blocks or child pages. Content links require public HTTPS URLs without credentials; slugs have a strict lowercase-dash grammar. Covers use a small image-host allowlist matching CSP. Unoptimized remote images load directly from approved hosts; no arbitrary server-side image proxy is exposed. JSON-LD escapes < and has regression coverage.
+
+Activity requests have an explicit host allowlist and HTTPS/port/credential/redirect restrictions. Authorization is allowed only for api.github.com. Schema checks and dated verified snapshots distinguish unavailable data from zero. No private repositories are requested.
+
+## Authentication and messages
+
+Google OAuth credentials are stored only in this portfolio’s Supabase provider. Server application code uses a publishable key, not a service-role key. Auth uses PKCE and server-verified getUser identity; cookies are HTTP-only, SameSite Lax and Secure in production. Authenticated guestbook/callback pages are dynamic, private/no-store and receive a fresh nonce-based script policy. Google login is enabled for production after canonical return URLs and a real sign-in/sign-out flow were verified; Vercel previews keep login disabled.
+
+Guestbook and article comments share one moderated table. Only approved name/text/date are readable anonymously. Authors can read/delete their own submissions; inserts must use their own verified identity and default to pending. They cannot change status or impersonate another author. Input limits are enforced both in code and database constraints. A per-user advisory lock and private timestamp ledger enforce at most three posts per rolling ten minutes, including posts the author subsequently deletes. The bounded private ledger has RLS and no client grants; its trigger is SECURITY DEFINER with an empty search path and an authenticated-author check, and is not a public RPC. Submitted article slugs are checked against an actually Published article with comments enabled.
+
+Database regression checks ran inside a rolled-back transaction: impersonation rejected, self-approval rejected, rate limit enforced, own deletion works. No test users/comments were left behind. A real Google login, private pending submission, author deletion and sign-out were also verified against the production portfolio. The test submission was removed without publishing a fake public comment.
+
+## Visitor counter
+
+The browser receives only an approximate total. The database stores an HMAC of a random HTTP-only browser cookie and first-visit time; it does not store raw IP addresses. Server-only VISITOR_WRITE_KEY gates the counter RPC; private tables have RLS and no public table grants. Authenticated-role function grants inherited from Supabase defaults were revoked. The anon RPCs intentionally use SECURITY DEFINER with an empty search path: one returns only a count, the other requires the private write key. These intentional grants produce advisor warnings; private-table RLS-without-policies notices are expected because all table access is denied.
+
+Count writes are disabled locally and in preview, enabled only for production. Different devices, cleared cookies and automated traffic can affect the number. It is not a guaranteed unique-human count or an abuse-proof analytics service. Foreign-origin writes are rejected; public count reads remain available. Supabase outages produce an unavailable state rather than invented totals.
+
+## Browser and credential boundaries
+
+CSP blocks frames, objects, base-tag injection and inline script attributes. Remote images are restricted to GitHub, Notion’s supported S3 hosts and Unsplash. Auth form destinations are fixed to the portfolio Supabase callback/Google. X-Frame-Options, nosniff, Permissions-Policy, Referrer-Policy and production HSTS are configured. Public cached Next.js pages still allow inline bootstrap scripts; this documented compatibility exception is weaker than a strict nonce CSP. unsafe-eval is development-only. Styles allow inline values for Next.js/Motion.
+
+Ignored environment files and Vercel server-only secrets hold tokens. No NEXT_PUBLIC secret or browser service-role key is used. Secrets must never be printed, committed, added to Notion records, or placed in URLs. The owner explicitly approved transfer of the publishable key and visitor-write key to this portfolio’s Vercel project. Google client secrets are not copied to Vercel.
+
+Email/Copy labels hide the address visually, but a functional mailto link remains discoverable. The private contact dock opens an email draft unless Formspree is configured; delivery is never simulated. Theme/sound preferences and contact drafts use browser storage. Avoid sensitive drafts on shared browsers. Cal.com is a fixed external link, with no embedded scheduling credentials.
+
+## Verification limits
+
+Run npm run check and npm run security:audit before releases. Current checks cover source behavior, validation, publishing filters, activity parsing and SEO. The review does not cover Git-history secrets, external service security, DDoS protection, account permissions, or a live production penetration test. Verify CDN headers, authenticated cache isolation and real OAuth flows after deployment. Report issues privately using the contact link.

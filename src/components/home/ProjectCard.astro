@@ -1,0 +1,135 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  stack: string[];
+  github?: string;
+  live?: string;
+  caseStudy?: string;
+}
+const { title, description, stack, github, live, caseStudy } = Astro.props;
+---
+<article class="proj rv">
+  <div class="proj-head">
+    <h3 class="proj-title">{title}</h3>
+    <div class="proj-links">
+      {github && <a href={github} target="_blank" rel="noreferrer" aria-label={`${title} on GitHub`}>GitHub ↗</a>}
+      {live && <a href={live} target="_blank" rel="noreferrer" aria-label={`${title} live site`}>Live ↗</a>}
+    </div>
+  </div>
+
+  <p class="proj-desc">{description}</p>
+
+  <div class="proj-footer">
+    <div class="proj-stack">
+      {stack.map((tech) => <span>{tech}</span>)}
+    </div>
+    
+    <a class="proj-cta" href={caseStudy ?? '#'}>
+      <span>Case Study</span>
+      <span class="arr" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+</article>
+
+<style>
+  .proj {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .proj:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-2);
+  }
+
+  .proj-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .proj-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .proj-links {
+    display: flex;
+    gap: 10px;
+  }
+  .proj-links a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .proj-links a:hover {
+    color: var(--text);
+  }
+
+  .proj-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-2);
+    flex: 1;
+  }
+
+  .proj-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: auto;
+    padding-top: 8px;
+  }
+
+  .proj-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .proj-stack span {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    background: var(--chip);
+    border: 1px solid var(--chip-border);
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: var(--muted);
+  }
+
+  .proj-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--text-2);
+    text-decoration: none;
+    background: transparent;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+  .proj-cta .arr {
+    transition: transform 0.15s;
+  }
+  .proj-cta:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+    background: var(--surface);
+  }
+  .proj-cta:hover .arr {
+    transform: translateX(2px);
+  }
+</style>

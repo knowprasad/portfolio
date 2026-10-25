@@ -1,0 +1,254 @@
+---
+import Signals from './Signals.astro';
+---
+<div class="hero rv">
+  <div class="hero-row">
+    <div class="hero-content">
+      <p class="hero-kicker">Software & Systems Engineering</p>
+      
+      <h1 class="hero-title">
+        Engineering reliable systems,<br>
+        algorithms & AI pipelines.
+      </h1>
+
+      <p class="hero-bio">
+        I'm <strong>Shubham</strong>, a third-year student at <strong>IIITM Gwalior</strong> (B.Tech + M.Tech IT, 2027).
+        I spend my time between competitive programming (<a href="https://codeforces.com/profile/prsdx" target="_blank" rel="noreferrer">Codeforces Expert, 1847</a>),
+        retrieval-augmented architectures, and reading database internals chapter by chapter.
+      </p>
+
+      <div class="hero-meta">
+        <span>Gwalior, India</span>
+        <span class="sep">·</span>
+        <span>Graduating 2027</span>
+        <span class="sep">·</span>
+        <a href="mailto:shubham@example.com">shubham@example.com</a>
+      </div>
+
+      <div class="hero-actions">
+        <a href="/resume.pdf" class="btn-resume">
+          <span>Résumé</span>
+          <span class="arr" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="#work" class="btn-explore">Selected Work</a>
+      </div>
+    </div>
+
+    <div class="hero-aside">
+      <div class="portrait-card">
+        <div class="portrait-box">
+          <span class="portrait-char">S</span>
+        </div>
+        <div class="portrait-footnote">
+          <span class="status-dot"></span>
+          <span>Open to Summer 2027</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Signals />
+</div>
+
+<style>
+  .hero {
+    padding: 64px 0 16px;
+  }
+
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .hero-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .hero-bio {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text-2);
+    max-width: 44em;
+    margin-bottom: 22px;
+  }
+  .hero-bio strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .hero-bio a {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--border-hover);
+    transition: text-decoration-color 0.15s, color 0.15s;
+  }
+  .hero-bio a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .hero-meta .sep {
+    color: var(--border);
+  }
+  .hero-meta a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .hero-meta a:hover {
+    color: var(--text);
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .btn-resume {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .btn-resume:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+  .btn-resume .arr {
+    transition: transform 0.15s;
+  }
+  .btn-resume:hover .arr {
+    transform: translateX(2px);
+  }
+
+  .btn-explore {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 16px;
+    background: transparent;
+    color: var(--text-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+  .btn-explore:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+    background: var(--surface);
+  }
+
+  /* Aside portrait */
+  .hero-aside {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .portrait-card {
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .portrait-box {
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s;
+  }
+  .portrait-box:hover {
+    border-color: var(--border-hover);
+  }
+
+  .portrait-char {
+    font-family: var(--font-mono);
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--muted);
+    opacity: 0.6;
+  }
+
+  .portrait-footnote {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+  }
+
+  @media (max-width: 768px) {
+    .hero-row {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .hero-aside {
+      order: -1;
+      justify-content: flex-start;
+    }
+    .portrait-card {
+      max-width: 110px;
+      gap: 8px;
+    }
+    .portrait-box {
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+    }
+    .portrait-char {
+      font-size: 1.8rem;
+    }
+    .portrait-footnote {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+interface Signal {
+  value: string;
+  label: string;
+  sub: string;
+  href?: string | null;
+}
+
+const signals: Signal[] = [
+  { value: "1847", label: "Codeforces", sub: "Expert (prsdx)", href: "https://codeforces.com/profile/prsdx" },
+  { value: "500+", label: "DSA solved", sub: "CF + LC + CC", href: null },
+  { value: "300+", label: "Contributions", sub: "GitHub (2025–26)", href: "https://github.com/prsdx" },
+  { value: "3",    label: "Shipped", sub: "Products built", href: "#work" },
+];
+---
+<div class="signals rv" role="list" aria-label="Key signals and stats">
+  {signals.map((s) =>
+    s.href ? (
+      <a class="sig" role="listitem" href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel={s.href.startsWith('http') ? 'noreferrer' : undefined}>
+        <b class="sig-val">{s.value}</b>
+        <span class="sig-label">{s.label}</span>
+        <span class="sig-sub">{s.sub}</span>
+      </a>
+    ) : (
+      <div class="sig" role="listitem">
+        <b class="sig-val">{s.value}</b>
+        <span class="sig-label">{s.label}</span>
+        <span class="sig-sub">{s.sub}</span>
+      </div>
+    )
+  )}
+</div>
+
+<style>
+  .signals {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 36px 0 8px;
+  }
+
+  .sig {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  a.sig:hover {
+    border-color: var(--border-hover);
+    background: var(--surface-2);
+  }
+
+  .sig-val {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .sig-label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-2);
+    margin-top: 4px;
+  }
+  .sig-sub {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 768px) {
+    .signals {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+interface Achievement {
+  place: string;
+  event: string;
+  year: string;
+}
+const achievements: Achievement[] = [
+  { place: "1st",     event: "Hackathon Name",  year: "2025" },
+  { place: "Top 10%", event: "Another Event",   year: "2024" },
+  { place: "100-day", event: "Coding streak",   year: "2025" },
+];
+---
+<ul class="ach-list rv">
+  {achievements.map((a) => (
+    <li>
+      <span class="ach-place">{a.place}</span>
+      <span class="ach-event">{a.event}</span>
+      <span class="ach-year">{a.year}</span>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .ach-list {
+    list-style: none;
+    border-top: 1px solid var(--border);
+  }
+  .ach-list li {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 16px;
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    transition: background .15s;
+  }
+  .ach-list li:hover {
+    background: var(--surface-2);
+    border-radius: 6px;
+  }
+  .ach-place {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .ach-event {
+    color: var(--text);
+    font-size: .92rem;
+    font-weight: 500;
+  }
+  .ach-year {
+    font-family: var(--font-mono);
+    font-size: .7rem;
+    color: var(--muted);
+  }
+</style>

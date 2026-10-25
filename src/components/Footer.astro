@@ -1,0 +1,64 @@
+---
+---
+<footer id="contact">
+  <div class="foot-inner">
+    <div class="foot-left">
+      <span class="foot-name">Shubham<span class="dot">.</span></span>
+      <span class="foot-loc">Built at IIITM Gwalior, India · Sep 2026</span>
+    </div>
+    <nav class="foot-links" aria-label="Social links">
+      <a href="https://github.com/prsdx">GitHub</a>
+      <a href="https://x.com/prsd_x">X</a>
+      <a href="https://codeforces.com/profile/prsdx">Codeforces</a>
+      <a href="/rss.xml">RSS</a>
+      <a href="mailto:shubham@example.com">Email</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  footer {
+    max-width: 1080px;
+    margin: 64px auto 0;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .foot-inner {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .foot-left {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .foot-name {
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--text);
+    letter-spacing: -.01em;
+  }
+  .dot { color: var(--accent); }
+  .foot-loc {
+    font-size: .78rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+  .foot-links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .foot-links a {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .15s;
+  }
+  .foot-links a:hover { color: var(--accent); }
+</style>

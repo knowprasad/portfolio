@@ -1,7 +1,22 @@
-# Development
+## Development
 
-Run development servers in the background with a hidden window. Use npm run dev (port 3001); record the process ID and logs under ignored test-results/. Check the existing process before starting another server. Stop only the process started for this project.
+When starting the dev server, use background mode:
 
-On Windows, use Start-Process -WindowStyle Hidden with redirected output. Keep the user's terminal available.
+```
+astro dev --background
+```
 
-This is the approved Next.js rebuild. Previous Astro commands no longer apply. Consult installed Next.js documentation and official docs when changing routing, data fetching or caching.
+Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+
+## Documentation
+
+Full documentation: https://docs.astro.build
+
+Consult these guides before working on related tasks:
+
+- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
+- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
+- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
+- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
+- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
+- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)

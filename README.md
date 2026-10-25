@@ -1,54 +1,98 @@
-# Shubham Prasad’s portfolio
+# Astro Starter Kit: Minimal
 
-Next.js App Router, React, TypeScript and Tailwind. Reference decisions: PRODUCT.md. Delivery checklist: references/IMPLEMENTATION-AUDIT.md.
+```sh
+npm create astro@latest -- --template minimal
+```
 
-Live website: https://knowprasad.me/ · Source: https://github.com/knowprasad/portfolio
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-## Handover documentation
+## 🚀 Project Structure
 
-- [Owner handbook](docs/OWNER-HANDBOOK.md): step-by-step content management for every section, photos, résumé, moderation, backups and troubleshooting.
-- [Operations](docs/OPERATIONS.md): development, environments, deployments, authentication, security boundaries and recovery.
-- [Handover checklist](references/HANDOVER-CHECKLIST.md): verified delivery status and owner-supplied content still needed.
+Inside of your Astro project, you'll see the following folders and files:
 
-## Development
+```text
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
 
-Node 24; npm ci. Run npm run dev in a hidden background process on port 3001 (CLAUDE.md). Checks: npm run lint, npm run typecheck, npm test, npm run build. Production builds use webpack because of a Windows Turbopack issue. npm run security:audit checks known dependency advisories.
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-## Edit content in Notion
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-Private Portfolio CMS: https://app.notion.com/p/40442b1c345e815c9edbdf10ac50db93
-Owner guide: https://app.notion.com/p/40442b1c345e81eb9bcdda4143b12000
+Any static assets, like images, can be placed in the `public/` directory.
 
-Eight databases cover profile/résumé, work/highlights, projects, writing, personal library, places, friends and stack. Duplicate a starter, fill its properties and set Publish to Published. Draft and Archived entries are excluded from public pages and search. Source IDs are in src/data/notion-sources.json; the runtime token is a read-only connection shared only with this hub. Keep NOTION_TOKEN in the server environment, never in Git or NEXT_PUBLIC variables. The owner approved publishing the 35 existing profile/project/work/highlight/tool records; personal shelf/friend/place/article starters remain Draft.
+## 🧞 Commands
 
-Caching is request-driven, approximately five minutes. It is not an exact scheduler. Supported blocks: paragraphs, headings, lists, quotes, callouts, code, images, tables and toggles. Embeds, synced private blocks, child pages and arbitrary HTML/scripts are not followed. Stable HTTPS covers must use approved hosts: GitHub, Notion’s us-west-2 S3 file hosts, or images.unsplash.com. Unsupported images are omitted rather than proxied.
+All commands are run from the root of the project, from a terminal:
 
-Missing configuration/source failures retain verified local project/profile defaults or honest empty collections. A successful empty Published query is respected. For first connection, review/publish existing seeded drafts before switching the token on, otherwise those sections intentionally become empty.
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## Writing and search
+## 👀 Want to learn more?
 
-Write your original article in a Writing record body, set a unique lowercase-dash Slug, Summary, Published date, Comments and Publish=Published. It appears at /writing/slug and in /writing. The dock searches published article text as well as projects and sections; / and Ctrl/Cmd+K open it. Linked reading recommendations belong in the Articles/Papers personal shelf, not Writing.
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 
-To cross-post on Medium, publish on your site first, then use Medium’s import/canonical controls. This project does not automatically publish to Medium. Discussion comments are stored in Supabase, separate from Notion.
+## Project commands
 
-## Public messages and moderation
+Use Node `22.12.0` (the version is pinned in `.nvmrc`) and install the locked dependencies:
 
-Google OAuth credentials are stored only in the portfolio Supabase Google provider. Google login is enabled in Production after callback/origin configuration and a real login test; Preview remains disabled. Sessions use HTTP-only cookies; authenticated pages are private/no-store. Supabase project: hhbuhqevmskpuvybiwii.
+```sh
+npm ci
+npm run dev
+npm run build
+npm test
+```
 
-Messages start pending. In Supabase Table Editor > guestbook_messages, review a message then set status=approved or rejected. article_slug=null means guestbook; a slug identifies its article discussion. Only approved messages are public; signed-in authors can see/delete their own submissions. Database rules prevent impersonation/self-approval, limit posting to three messages per ten minutes, and keep identity/email private.
+The background development-server workflow is documented in `CLAUDE.md`:
 
-Apply only reviewed migrations in supabase/migrations. The browser receives no service-role or visitor-write key. The approximate visitor counter stores HMAC browser identifiers, not IP addresses. VISITOR_COUNT_ENABLED stays false locally; production enabling requires the matching private VISITOR_WRITE_KEY. Cleared cookies/devices may count again.
+```sh
+astro dev --background
+astro dev status
+astro dev logs
+astro dev stop
+```
 
-## Résumé, friends and shelves
+## Notion content sync
 
-Add the real PDF URL to Notion Profile > Resume PDF, or set RESUME_URL, or add public/resume.pdf. Until supplied, /resume links to real projects/work/LinkedIn. Do not fabricate a PDF.
+The blog sync reads published pages from Notion and writes generated MDX files to `src/content/blog/`:
 
-Add friends in Notion Friends with name and HTTPS website, optional avatar and note, Publish=Published. No webring is required. Books, articles/papers, watchlist and channels use Personal Library’s Shelf/Format fields; travel uses Places’ Visited/Want to go. Only share recommendations you choose to make public.
+```sh
+npm run fetch-content
+```
 
-## Activity, icons and privacy
+Set `NOTION_TOKEN` and `NOTION_DATABASE_ID` first. Optional `NOTION_PROP_*` variables in `.env.example` override the expected Notion property names. The Notion database must be shared with the integration. Never commit or print the token.
 
-Public GitHub/LeetCode/Codeforces/CodeChef data refreshes automatically about hourly on requests. Upstream failures use dated verified snapshots or explicit unavailable states; accepted-only streak history is partial where the provider limits submissions. No private repository data is fetched.
+The scheduled GitHub Action requires repository secrets with the same two names. It can also be run manually from the Actions tab after the secrets and database access are configured.
 
-The original anime avatar is used for navigation/favicon and reveals the real photo on click. The real photo follows the public GitHub avatar unless Profile > Photo overrides it. GitHub profile metadata has a five-minute server cache. Interface symbols use local free IconScout Unicons; tool logos use local Skill Icons; licenses remain in public/. Custom project marks are original. Sound defaults off. The contact dock opens a mail draft; optional Formspree needs its own configured form. Email/Copy labels hide the address visually, not cryptographically.
+`npm test` is the offline regression check and runs the production build. The equivalent repository command is `make test`. There is no dedicated lint or typecheck script yet.
 
-SECURITY.md records actual controls and limits. Public HTML includes canonical URLs, JSON-LD and social metadata; only substantive published pages enter the sitemap. llms.txt is an optional reading index, not a ranking guarantee. Research, retired prototypes, tests/artifacts and secrets are excluded from deployment. Do not commit/push without owner instruction.
+## Container
+
+Build and run the pinned production image locally:
+
+```sh
+docker build -t portfolio:local .
+docker run --rm -p 4321:4321 portfolio:local
+```
+
+The same commands are available as `make docker-build` and `make docker-run`.
+
+## Deploy
+
+For Vercel, connect the repository to a Vercel project and deploy the `main` branch, or authenticate the Vercel CLI and run:
+
+```sh
+npx vercel --prod
+```
+
+Set the Notion secrets in GitHub Actions separately from any Vercel environment variables. The deploy account, domain, and DNS configuration are intentionally not stored in this repository.
