@@ -1,6 +1,3 @@
-/*
-!/site/
-!/site/**
 **/node_modules/**
 **/.next/**
 **/.env*
@@ -8,4 +5,4 @@
 **/graphify-out/**
 **/.firecrawl/**
 **/references/**
-**/*.md
+.git
