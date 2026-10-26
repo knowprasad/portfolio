@@ -35,3 +35,7 @@ Email/Copy labels hide the address visually, but a functional mailto link remain
 ## Verification limits
 
 Run npm run check and npm run security:audit before releases. Current checks cover source behavior, validation, publishing filters, activity parsing and SEO. The review does not cover Git-history secrets, external service security, DDoS protection, account permissions, or a live production penetration test. Verify CDN headers, authenticated cache isolation and real OAuth flows after deployment. Report issues privately using the contact link.
+
+## Comment pins
+
+Only owner dashboard access can change the pinned flag or moderation status. Public reads include the pinned boolean only for approved messages under existing RLS. Anonymous and authenticated visitors have no INSERT or UPDATE privilege on pinned; pinning does not publish pending/rejected messages. A rolled-back database regression verified approved pinned-first ordering and exclusion of pending pins.

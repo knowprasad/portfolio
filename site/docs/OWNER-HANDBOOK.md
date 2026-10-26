@@ -223,6 +223,10 @@ New submissions start **pending**. They are visible to their author in Your subm
 4. Change `status` to `approved` to publish, or `rejected` to keep it off public pages.
 5. Check the relevant page after its short public-message cache refresh (about one minute).
 
+**Pin a comment:** in the same `guestbook_messages` table, set its `status` to `approved` and its `pinned` checkbox to `true`, then save the row. Pinned messages sort before other approved messages and show a Pinned label. Several pins are allowed; the newest pinned message comes first. Set `pinned` back to `false` to unpin. Pinning a pending/rejected message does not publish it. The same control works for article discussions. Visitors cannot approve or pin their own messages. Allow about one minute for the public cache to refresh, then reload the page.
+
+After posting, the author immediately sees a saved/pending confirmation and their private entry directly below the form. The public list contains approved messages only. Sign in using the same Google account to see that account's submissions. A successful post does not require typing it again.
+
 `article_slug = null` means the general guestbook. A slug means an article discussion. The homepage previews up to three approved guestbook messages; `/guestbook` shows the larger list. Article Comments controls whether a published article accepts discussion.
 
 Do not change the author's `user_id` or manually grant moderation rights to ordinary visitors. Supabase dashboard access is an owner privilege. Rejected messages remain private to their author/owner; delete only when you intend to remove them. There are no built-in automatic email notifications or a separate custom moderation dashboard.

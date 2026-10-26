@@ -1,6 +1,6 @@
 # Portfolio agent instructions
 
-The approved rebuild uses Next.js App Router, React, TypeScript and npm. Read PRODUCT.md and prd.md for product decisions. The original Astro app is preserved at the parent repository root. This Next.js application lives in site/; do not remove or overwrite legacy root files.
+The approved rebuild uses Next.js App Router, React, TypeScript and npm. Read PRODUCT.md and prd.md for product decisions. The owner approved removal of the old Astro application. This Next.js application lives in site/.
 
 - Keep public content server-rendered; isolate interactive client components.
 - Read CLAUDE.md for background-server operation. Commands live in package.json.

@@ -38,7 +38,7 @@ export async function postMessage(_previous: { message: string; success: boolean
   revalidatePath('/guestbook');
   revalidatePath('/');
   if(articleSlug) revalidatePath(`/writing/${articleSlug}`);
-  return { message: 'Thank you! Your message is saved and will appear after review.', success: true };
+  return { message: 'Saved successfully. Your message is pending review, so it is not public yet. You can see it below in Your submissions.', success: true };
 }
 
 export async function deleteOwnMessage(form: FormData) {

@@ -4,7 +4,7 @@ Latest owner choices supersede earlier alternatives. This is a delivery checklis
 
 ## Implemented in the application
 
-- [x] Next.js/TypeScript rebuild under site/; original Astro files preserved at repository root; research outside production.
+- [x] Next.js/TypeScript rebuild under site/; old Astro files removed with owner approval, recoverable in Git history; research outside production.
 - [x] Fresher order: hero → tools → projects → work/experience → highlights.
 - [x] Geist/Paper Mono typography, larger readable headings/body; black/white circular theme reveal.
 - [x] Theme-specific shadows; paired dashed separators; no pointer ring/section glow.

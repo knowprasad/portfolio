@@ -10,9 +10,9 @@ Notion is a read-only content source at runtime. Eight fixed data-source IDs liv
 
 Supabase provides Google authentication, a moderated message table and the approximate visitor counter. The app uses its publishable key on the server, not a service-role key. Google client credentials remain in Supabase's Google provider. Owner moderation uses the Supabase dashboard.
 
-Vercel hosts the website. The `prsdxportfolio` project must use `site` as its Root Directory; the repository-root Astro project is separate. Namecheap remains the domain registrar/DNS provider; the registration was not transferred. `www.knowprasad.me` redirects permanently to `knowprasad.me` while preserving the path. No separate paid application server is required for this design.
+Vercel hosts the website. The `prsdxportfolio` project must use `site` as its Root Directory; the old Astro source was removed with owner approval. Namecheap remains the domain registrar/DNS provider; the registration was not transferred. `www.knowprasad.me` redirects permanently to `knowprasad.me` while preserving the path. No separate paid application server is required for this design.
 
-All application paths below are relative to `site/`, unless explicitly described as repository-root paths. The repository root retains the original Astro portfolio.
+All application paths below are relative to `site/`, unless explicitly described as repository-root paths. The old Astro portfolio was removed with owner approval and remains recoverable in Git history.
 
 ## Source map
 
@@ -42,7 +42,7 @@ All application paths below are relative to `site/`, unless explicitly described
 | `references/` | Local research/raw captures; excluded from deployed bundles |
 | `test-results/` | Ignored disposable test evidence, never production source |
 
-The original Astro application, content, assets, lockfile and Notion-fetch workflow remain at the repository root. Keep them intact. The new Next.js runtime and its dependencies are isolated under `site/`; the legacy workflow does not write into this directory. The new CI workflow at `.github/workflows/portfolio-ci.yml` runs with `site` as its working directory.
+The old Astro application and scheduled Notion-fetch workflow were removed with owner approval. The Next.js runtime and its dependencies are isolated under `site/`. The new CI workflow at `.github/workflows/portfolio-ci.yml` runs with `site` as its working directory.
 
 ## Local setup
 

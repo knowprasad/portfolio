@@ -1,5 +1,5 @@
-export type PublicMessage = { id: string; name: string; text: string; date: string };
+export type PublicMessage = { id: string; name: string; text: string; date: string; pinned: boolean };
 
 // Publish only real notes with the sender’s permission. Private email stays private.
-// A moderated public submission service will replace this list in a later phase.
+// Empty fallback: never substitute invented comments when the service is unavailable.
 export const publicMessages: PublicMessage[] = [];

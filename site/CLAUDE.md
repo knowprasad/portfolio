@@ -4,4 +4,4 @@ Run development servers in the background with a hidden window. Use npm run dev 
 
 On Windows, use Start-Process -WindowStyle Hidden with redirected output. Keep the user's terminal available.
 
-This is the approved Next.js rebuild. Run these commands from site/. Commands at the parent repository root belong to the preserved Astro application. Consult installed Next.js documentation and official docs when changing routing, data fetching or caching.
+This is the approved Next.js rebuild. Run these commands from site/. The old Astro application was removed with owner approval. Consult installed Next.js documentation and official docs when changing routing, data fetching or caching.

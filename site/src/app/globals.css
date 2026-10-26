@@ -3973,3 +3973,6 @@ dialog { box-shadow:var(--shadow-dialog); }
 .place-cover { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .shelf-art:has(.place-cover) .map-lines { opacity:0; }
 .library-item>div { min-width:0; overflow-wrap:anywhere; }
+
+.message-pin { color: var(--dim); font-size: 11px; border: 1px solid var(--line); border-radius: 999px; padding: 2px 7px; }
+.public-message-heading { margin-top: 40px; }

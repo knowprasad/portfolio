@@ -6,7 +6,7 @@ This checklist distinguishes shipped functionality from personal content the own
 
 ## Implemented
 
-- Next.js rebuild; original Astro source/content/assets/workflow preserved at repository root; new runtime isolated in site/; no paid infrastructure upgrade.
+- Next.js rebuild; old Astro source removed with owner approval, recoverable in Git history; new runtime isolated in site/; no paid infrastructure upgrade.
 - Hero with anime-to-real-photo reveal, nudge, sound opt-in and automatic GitHub photo fallback; optional Notion Photo override.
 - Larger readable headings, subtle dark/light contrast, paired dashed separators, keyboard focus and reduced-motion handling.
 - Sticky section navigation, scroll progress and searchable dock.
@@ -16,7 +16,7 @@ This checklist distinguishes shipped functionality from personal content the own
 - Green GitHub contribution calendar/skyline, organization/individual icon groups and merged/open/closed/reviewed PR filters.
 - Writing archive/detail renderer, contents, reading controls, search indexing and moderated article discussion structure.
 - Off the Clock collage and separate books, articles/papers, watchlist, channels and places pages.
-- Arman-style Leave a message layout; Google login, private pending submissions, author deletion and sign-out.
+- Arman-style Leave a message layout; Google login, private pending receipts next to the form, author deletion, sign-out and owner-managed pinned approved comments.
 - Hero booking link to Cal.com; generic Email/Copy contact links; social previews; friends/footer structure.
 - Approximate private-hash visitor counter, public count read and restricted server write function.
 - Canonical metadata, social cards, structured data, sitemap, robots and machine-readable reading index.
@@ -36,7 +36,7 @@ This checklist distinguishes shipped functionality from personal content the own
 
 ## Quality evidence
 
-- ESLint, TypeScript, 37 tests and production build passed after the auth callback repair and CMS preparation.
+- ESLint, TypeScript, 39 tests and production build passed after the auth callback repair and CMS preparation.
 - npm dependency audit: zero known vulnerabilities at the latest successful check.
 - Mobile performance audit: Slow 4G, 4× CPU, 390×844; post-fix median LCP 2.1s, CLS 0.00 across three cold loads. These are lab measurements, not a field guarantee.
 - 320px/390px checks found no horizontal page overflow; footer items have a verified 20px gap. Header/controls and complete flow checks are part of the final release pass.

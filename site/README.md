@@ -12,7 +12,7 @@ Live website: https://knowprasad.me/ · Source: https://github.com/knowprasad/po
 
 ## Development
 
-Run the following commands from `site/`, the new app directory. The original Astro application is preserved at the parent repository root.
+Run the following commands from `site/`, the new app directory. The old Astro application was removed with owner approval and remains recoverable in Git history.
 
 Node 24; npm ci. Run npm run dev in a hidden background process on port 3001 (CLAUDE.md). Checks: npm run lint, npm run typecheck, npm test, npm run build. Production builds use webpack because of a Windows Turbopack issue. npm run security:audit checks known dependency advisories.
 
