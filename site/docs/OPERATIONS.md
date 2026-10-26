@@ -26,6 +26,7 @@ All application paths below are relative to `site/`, unless explicitly described
 | `src/app/guestbook/` | Sign-in, posting, sign-out and own-message actions |
 | `src/app/auth/callback/` | PKCE code exchange and canonical/local return |
 | `src/app/api/search/` | Public content search index |
+| `src/app/api/profile-photo/`, `src/lib/public-profile-image.ts` | Fixed owner-photo delivery, safe redirects, raster types and size limit |
 | `src/app/api/visitors/` | Read/count endpoints |
 | `src/components/` | UI components and interactions |
 | `src/lib/notion-server.ts`, `content-model.ts` | Scoped Notion reads, caching, validation and safe blocks |
@@ -191,3 +192,7 @@ For domain problems, inspect only the intended website records. The verified ape
 ## What is outside a source backup
 
 Back up Notion content, original media/PDFs, moderation data and owner account recovery information separately. Store recovery codes/passwords in a password manager, not Git. Keep the Vercel variable names documented but their values in the secure service configuration. A clean checkout should install/build without private credentials using the verified fallback/empty states; it cannot reproduce live account configuration by itself.
+
+## Accessibility maintenance
+
+Keep every main landmark at id=main with tabIndex=-1 so the skip link moves keyboard focus. Keep visible button text in its accessible name; decorative typing pauses on keyboard focus. The contribution grid is a visual summary with an accessible date lookup rather than hundreds of tiny buttons. Contributor images use first-party optimization and a GitHub-symbol fallback. See references/ACCESSIBILITY-AUDIT.md for the actual WCAG test matrix, manual checks and limitations. Repeat browser accessibility checks after meaningful UI or content changes.

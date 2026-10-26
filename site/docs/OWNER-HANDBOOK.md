@@ -80,7 +80,7 @@ The **Bio property** is public. The record body is not a separate public About p
 
 By default the revealed real photo follows your public GitHub avatar. Change your profile picture in GitHub's profile settings. The website reads profile metadata with an approximately five-minute server cache; the image CDN/browser may also cache the photo. You do not need to upload it to this repository each time.
 
-To use a different photo just on this website, enter its public approved image URL in **Profile → Photo** and publish that profile. Clear Photo to return to the GitHub default. Approved image hosts are documented in section 14. A failed image request falls back to the bundled photo so the control remains usable.
+To use a different photo just on this website, enter its public approved image URL in **Profile → Photo** and publish that profile. Clear Photo to return to the GitHub default. Approved image hosts are documented in section 14. The photo is delivered through a first-party route with a short cache, so visitors do not need a direct GitHub CDN connection. A failed request shows the anime placeholder with an unavailable label. Use a PNG, JPEG, WebP, AVIF or GIF under 1 MB for a custom photo.
 
 The anime illustration shown before clicking is a separate site asset. It also appears in navigation/favicon artwork. Changing your GitHub photo does not replace that illustration. Replacing the anime illustration or browser icon is a design/code update; see OPERATIONS.md.
 
@@ -94,7 +94,7 @@ Open **Projects**. Each record represents one project and can produce both a hom
 | --- | --- |
 | Name | The project name visitors see |
 | Slug | Unique lowercase words separated by hyphens, such as `my-study-tool` |
-| Summary | Concise explanation used in cards and the quick-view dialog |
+| Summary | Concise explanation used in project cards and the overview |
 | Project status | Building, Live, Open source, Archived, or Demo paused |
 | Live URL | Public demo URL; leave empty when there is no public demo |
 | Source URL | Public source repository; leave empty for private repositories |
@@ -104,7 +104,7 @@ Open **Projects**. Each record represents one project and can produce both a hom
 | Order | Display position |
 | Publish | Controls publication, independently of Project status |
 
-Write the longer case study in the **record body**. Useful headings are Problem, What I built, How it works, Tradeoffs, What I learned, and Current limitations. These body blocks appear on the project detail page. The card's quick-view dialog uses the summary, not the entire case study.
+Write the longer case study in the **record body**. Useful headings are Problem, What I built, How it works, Tradeoffs, What I learned, and Current limitations. These body blocks appear on the project detail page. Clicking a project card or its preview goes directly to its detail page. There is no intermediate dialog.
 
 The homepage shows up to four featured projects; if no project is marked Featured, it uses the first four projects. `/projects` contains the full published list. Existing bundled project images/marks remain available for Merix, PlateWise, Pulse and YourTomo. A new project can use a cover immediately; a custom original logo is a separate asset/code change.
 
@@ -301,3 +301,12 @@ Write useful titles and summaries. Keep URLs stable and images descriptive. Avoi
 Ask for development help for new features, different page structures, unsupported content blocks, new icon types/image hosts, new social/provider integrations, authentication/security changes, domain changes and database schema migrations. Keep your request concrete: the public URL, what you expected, what happened, device/browser, and a screenshot without passwords/tokens.
 
 For ordinary content updates, use the CMS workflow above. Keep credentials in the service's secure settings or ignored server environment; never place them in Notion content, a GitHub issue, a public screenshot or this handbook.
+
+
+### Interface sounds
+
+Sound is off until the visitor enables it in the header, and the preference stays on that browser. The site resumes mobile audio during a user gesture and schedules the tone only once the audio clock is running. Browser restrictions, media volume, output routing and phone silent mode may still prevent audible playback; the site does not override device settings.
+
+### Can project pages follow a GitHub README?
+
+Yes. A future read-only integration can fetch the README server-side from each approved Source URL, cache it and render it as a labelled repository-documentation section. It should sanitize Markdown/links and preserve a useful page when GitHub is unavailable. This release still uses your published Notion project body for its five-section case study; README synchronization is not enabled. Keep role, ownership and decision notes in Notion, since a README usually describes the product rather than your individual contribution.

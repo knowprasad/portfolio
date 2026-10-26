@@ -1102,33 +1102,6 @@ dialog::backdrop {
   background: #0008;
   backdrop-filter: blur(6px);
 }
-.project-dialog {
-  width: min(730px,calc(100% - 32px));
-}
-.dialog-close {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-}
-.dialog-project-heading {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  margin-top: 8px;
-}
-.dialog-project-heading h2 {
-  font: 36px/1.2 var(--font-display),Georgia,serif;
-}
-.dialog-project-heading .project-logo {
-  width: 46px;
-  height: 46px;
-  font-size: 31px;
-}
-.project-detail-copy {
-  font: 19px/1.6 var(--font-reading),Georgia,serif;
-  color: var(--muted);
-  margin: 23px 0;
-}
 .detail-media {
   width: 100%;
   height: auto;
@@ -1136,7 +1109,7 @@ dialog::backdrop {
   border: 1px solid var(--line);
   border-radius: 9px;
 }
-.dialog-links {
+.project-detail-links {
   display: flex;
   gap: 10px;
   align-items: center;
@@ -1550,15 +1523,6 @@ dialog::backdrop {
     gap: 12px;
     padding-inline: 14px;
     font-size: 12px;
-  }
-  .project-dialog {
-    padding: 22px 17px;
-  }
-  .dialog-project-heading h2 {
-    font-size: 32px;
-  }
-  .project-detail-copy {
-    font-size: 18px;
   }
   .inner-page {
     padding-top: 30px;
@@ -3886,6 +3850,7 @@ dialog { box-shadow:var(--shadow-dialog); }
 .profile-reveal.is-revealed .profile-photo { clip-path:circle(72% at 50% 50%); transform:scale(1); }
 .profile-reveal-hint { opacity:1; bottom:-27px; display:flex; align-items:center; gap:3px; color:var(--muted); font-family:cursive; font-size:12px; font-style:italic; pointer-events:none; }
 .profile-reveal-hint svg { width:30px; height:22px; transform:rotate(-35deg); flex-shrink:0; }
+@media(max-width:400px) { .profile-reveal-hint { left:0; transform:none; } }
 .profile-status { position:absolute; bottom:2px; right:0; width:11px; height:11px; border:3px solid var(--surface); border-radius:50%; background:#ef565f; box-shadow:0 0 0 1px var(--line); z-index:2; }
 .hero>.local-time { margin-top:35px; }
 .profile-reveal.is-revealed .profile-photo { animation:photo-assemble .6s steps(8,end) both; }
@@ -4000,3 +3965,25 @@ dialog { box-shadow:var(--shadow-dialog); }
 @media (max-width: 600px) { .project-case-study .project-detail-section h2 { font-size: 23px; }.coding-summary-list li { gap: 9px; font-size: 14px; }.oss-first { align-items: flex-start; gap: 8px; flex-wrap: wrap; } }
 
 .project-page-heading > .project-title-text { color: var(--ink); }
+
+.github-avatar { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; border-radius: inherit; background: var(--surface); color: var(--muted); vertical-align: middle; }
+.github-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.github-avatar-fallback { font-size: 12px; font-weight: 600; letter-spacing: .02em; }
+.contribution-date-control { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 18px 0 12px; color: var(--muted); font-size: 14px; }
+.contribution-date-control input { min-height: 44px; max-width: 100%; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); color: var(--ink); font: inherit; color-scheme: dark; }
+:root[data-theme=light] .contribution-date-control input { color-scheme: light; }
+.calendar-scroll:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
+
+:root[data-theme=light] { --dim: #686868; }
+:root[data-theme=light] .coding-profile.lc { --platform: #805500; }
+:root[data-theme=light] .coding-profile.cc { --platform: #795238; }
+:root[data-theme=light] .coding-profile.cf { --platform: #2b5c8a; }
+.activity-dashboard-heading { font-size: 25px; line-height: 1.3; margin-bottom: 24px; }
+
+main#main { scroll-margin-top: 110px; }
+.project-card { position: relative; }
+.project-main::after { content: ''; position: absolute; inset: 0; }
+.project-media,.project-quick-links { position: relative; z-index: 1; }
+.project-main:focus-visible::after { outline: 2px solid var(--ink); outline-offset: -3px; border-radius: 18px; }
+.stack-name { pointer-events: auto; }
+.stack-name::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 10px; }

@@ -49,3 +49,5 @@ references/*
 !references/IMPLEMENTATION-AUDIT.md
 !references/MOBILE-PERFORMANCE-AUDIT.md
 !references/HANDOVER-CHECKLIST.md
+
+!references/ACCESSIBILITY-AUDIT.md

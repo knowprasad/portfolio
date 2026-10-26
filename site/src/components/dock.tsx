@@ -3,10 +3,9 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Fuse from 'fuse.js';
 import { MagnifyingGlass, ArrowUpRight, ArrowLeft, X, Moon, Clock, EnvelopeSimple, PaperPlaneTilt, GithubLogo } from '@/components/icons';
-import { motion, useReducedMotion } from 'motion/react';
 import { projects, profile } from '@/data/site';
 import { toggleTheme } from './site-chrome';
-import { DockPrompt } from './dock-prompt';
+import { DockTrigger } from './dock-prompt';
 import { mergeSearchEntries, type SearchEntry as Entry } from '@/lib/search-index';
 
 const fallbackProjectPaths = new Set(projects.map(project => `/projects/${project.slug}`));
@@ -28,7 +27,6 @@ export function Dock() {
   const input = useRef<HTMLInputElement>(null);
   const opener = useRef<HTMLElement | null>(null);
   const router = useRouter();
-  const reduced = useReducedMotion();
   const [contentEntries, setContentEntries] = useState<Entry[]>([]);
   const [searchSource, setSearchSource] = useState<'loading' | 'live' | 'fallback'>('loading');
   const searchEntries = useMemo(() => mergeSearchEntries(entries, contentEntries, fallbackProjectPaths, searchSource), [contentEntries, searchSource]);
@@ -80,7 +78,7 @@ export function Dock() {
     setStatus('sending');
     try { const response = await fetch(`https://formspree.io/f/${encodeURIComponent(formId)}`, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(draft) }); if (!response.ok) throw new Error('Delivery failed'); setStatus('sent'); updateDraft({ name: '', email: '', message: '' }); } catch { setStatus('error'); }
   }
-  return <><motion.button className="floating-dock" onClick={() => open()} aria-label="Open search and contact dock" whileHover={reduced ? undefined : { y: -2 }} whileTap={reduced ? undefined : { scale: .98 }}><MagnifyingGlass size={16} /><DockPrompt /><kbd>/</kbd></motion.button>
+  return <><DockTrigger onOpen={() => open()}/>
     <dialog ref={dialog} className={`dock-dialog mode-${mode}`} aria-labelledby="dock-title" onClose={() => opener.current?.focus()} onClick={event => { if (event.target === event.currentTarget) { const rect = event.currentTarget.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) close(); } }}><div className="dock-heading">{mode !== 'search' && <button onClick={() => setMode('search')} className="icon-button" aria-label="Back to search"><ArrowLeft size={17} /></button>}<h2 id="dock-title">{mode === 'compose' ? 'Say hello' : mode === 'time' ? 'A little time check' : 'Where would you like to go?'}</h2><button onClick={close} className="icon-button" aria-label="Close dock"><X size={18} /></button></div>
       {mode === 'search' && <><div className="search-field"><MagnifyingGlass size={18} /><input ref={input} aria-label="Search the whole website" role="combobox" aria-expanded="true" aria-controls="dock-results" aria-activedescendant={results[index] ? `result-${index}` : undefined} value={query} onChange={event => { setQuery(event.target.value); setIndex(0); }} placeholder="Projects, writing, theme, time..." onKeyDown={event => { if (['ArrowDown', 'ArrowUp'].includes(event.key)) { event.preventDefault(); if (results.length) setIndex((index + (event.key === 'ArrowDown' ? 1 : -1) + results.length) % results.length); } else if (event.key === 'Enter' && results[index]) { event.preventDefault(); choose(results[index]); } }} /></div><div id="dock-results" role="listbox" aria-label="Search results" className="dock-results">{results.length ? results.map((entry, i) => <button id={`result-${i}`} key={entry.title} role="option" aria-selected={i === index} onMouseEnter={() => setIndex(i)} onClick={() => choose(entry)} className={i === index ? 'active' : ''}><span><strong>{entry.title}</strong><small>{entry.subtitle}</small></span><ArrowUpRight size={14} /></button>) : <p className="search-empty">No matches. Try a project name or “theme”.</p>}</div><div className="dock-shortcuts"><button onClick={() => { restoreDraft(); setMode('compose'); }}><EnvelopeSimple size={14} />Say hello</button><button onClick={toggleTheme}><Moon size={14} />Theme</button><span>↑ ↓ navigate · ↵ open</span></div></>}
       {mode === 'compose' && <form className="contact-form" onSubmit={send}><p>A question, an idea, or just a hello.</p>{!formId && <div className="contact-notice">Continue in your mail app to send this private note. Your draft stays in this browser.{email && <> You can <a href={`mailto:${email}`}>email me directly</a>.</>}</div>}<label>Your name<input required maxLength={100} value={draft.name} onChange={event => updateDraft({ ...draft, name: event.target.value })} autoComplete="name" /></label><label>Email<input type="email" required maxLength={254} value={draft.email} onChange={event => updateDraft({ ...draft, email: event.target.value })} autoComplete="email" /></label><label>Message<textarea required maxLength={5000} rows={4} value={draft.message} onChange={event => updateDraft({ ...draft, message: event.target.value })} /></label><div className="contact-actions"><a className="text-link" href="https://github.com/knowprasad" target="_blank" rel="noreferrer"><GithubLogo size={15} />Find me on GitHub</a><button type="submit" className="button primary" disabled={(!formId && !email) || status === 'sending'}><PaperPlaneTilt size={15} />{status === 'sending' ? 'Sending…' : formId ? 'Send message' : 'Open email app'}</button></div><p aria-live="polite">{status === 'sent' ? 'Your message was sent. Thank you!' : status === 'error' ? 'The message could not be sent. Your draft is saved; please try again.' : ''}</p></form>}

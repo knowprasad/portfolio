@@ -20,5 +20,5 @@ export const metadata: Metadata = {
   icons: { icon: { url: '/icon.png?v=shadow-1', type: 'image/png', sizes: '64x64' }, apple: '/apple-touch-icon.png?v=shadow-1' },
 };
 export default function RootLayout({ children }: Readonly<{children: React.ReactNode}>) {
-  return <html lang="en" data-theme="dark" suppressHydrationWarning className={`${body.variable} ${mono.variable}`}><head><script dangerouslySetInnerHTML={{ __html: themeScript }} /></head><body><a className="skip-link" href="#main">Skip to content</a><SiteChrome /><div className="page">{children}</div><Dock /></body></html>;
+  return <html lang="en" data-theme="dark" suppressHydrationWarning className={`${body.variable} ${mono.variable}`}><head><script dangerouslySetInnerHTML={{ __html: themeScript }} /></head><body><SiteChrome /><div className="page">{children}</div><Dock /></body></html>;
 }

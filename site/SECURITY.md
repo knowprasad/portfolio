@@ -43,3 +43,7 @@ Only owner dashboard access can change the pinned flag or moderation status. Pub
 ## Immediate publication
 
 The owner selected automatic publication for new guestbook and article comments. The insert policy permits only the authenticated author and the approved default; visitors still cannot supply status/pinned values or update either field. An isolated transaction verified a default authenticated post is immediately readable anonymously, then rolled back all fixture data. User writes/deletes expire the tagged public comment cache to avoid stale lists. Owner dashboard actions can hide or pin comments without a prepublication queue.
+
+## First-party profile image
+
+The profile-photo route resolves only the owner's published CMS photo or fixed GitHub profile; it accepts no arbitrary URL parameter. The optional profile=github value selects the same fixed owner's public GitHub photo. Every redirect is checked against the existing image-host allowlist; embedded credentials/private addresses are rejected. Only raster MIME types are served, bodies are bounded to 1 MB, requests omit credentials and use timeouts. Errors return a generic uncached 502. Public successful bytes have a five-minute shared cache; no auth or Notion token is returned to the browser.

@@ -10,7 +10,7 @@ This checklist distinguishes shipped functionality from personal content the own
 - Hero with anime-to-real-photo reveal, nudge, sound opt-in and automatic GitHub photo fallback; optional Notion Photo override.
 - Larger readable headings, subtle dark/light contrast, paired dashed separators, keyboard focus and reduced-motion handling.
 - Sticky section navigation, scroll progress and searchable dock.
-- Tech stack icons with tooltips; project cards, previews, quick-view dialogs and archive/detail pages.
+- Tech stack icons with tooltips; project cards, visible previews and direct archive/detail-page links.
 - Work dropdowns below projects/tools; Highlights with achievements and Show all/less.
 - LeetCode/Codeforces/CodeChef views plus combined accepted-solve streak/activity.
 - Green GitHub contribution calendar/skyline, organization/individual icon groups and merged/open/closed/reviewed PR filters.
@@ -62,3 +62,8 @@ New signed-in guestbook and article comments publish immediately. Posting and au
 ## Homepage inspection update
 
 The homepage now uses a compact three-platform coding summary linking to /activity. Detailed platform tabs, accepted-solution streaks and contest histories remain on that route. Open source shows three real merged PRs across repositories before the GitHub calendar; filters and expansion remain available. Project pages share five inspection sections, retain existing content, and clearly identify missing ownership/design notes. Added grouping/selection regressions bring the suite to 43 tests. Responsive checks verified 320px Activity and 390px project-page layouts without horizontal page overflow.
+
+
+## Interaction and accessibility release update
+
+Project cards now open their detail pages directly, including the image, title and card space; source/demo icons retain their destinations. The unused quick-view dialog was removed. Contributor avatars use first-party delivery with a symbol fallback; the profile image route was verified on Vercel Preview. Keyboard, contrast, daily contribution inspection and tooltip accessibility were repaired. See ACCESSIBILITY-AUDIT.md for test scope and limitations. The regression suite now includes 53 tests.

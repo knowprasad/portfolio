@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { StackTool } from './stack-tool';
 import { getContent } from '@/lib/notion-server';
 import { publicUrl } from '@/lib/content-model';
 
@@ -29,5 +29,5 @@ const tools = [
 export async function TechStack() {
   const entries = await getContent('stack');
   const selectedTools = entries === null ? tools : entries.flatMap(e=>{const match=tools.find(t=>t[1]===e.values['Icon key']);return match ? [[e.name,match[1],publicUrl(e.values.Website) || match[2],e.values.Category || match[3]]] : [];});
-  return <div className="stack-symbols" aria-label="Technologies and tools">{selectedTools.map(([name, icon, url, category]) => <a className="stack-symbol" key={icon} href={url} target="_blank" rel="noreferrer" aria-label={name}><Image src={`/stack-icons/${icon}.svg`} width={20} height={20} alt="" /><span className="stack-name" aria-hidden="true"><strong>{name}</strong><small>{category}</small></span></a>)}</div>;
+  return <div className="stack-symbols" role="group" aria-label="Technologies and tools">{selectedTools.map(([name, icon, url, category]) => <StackTool key={icon} name={name} icon={icon} url={url} category={category}/>)}</div>;
 }

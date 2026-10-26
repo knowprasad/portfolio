@@ -36,7 +36,7 @@ export function SiteChrome() {
     sync(); window.addEventListener('portfolio-theme', sync);
     return () => window.removeEventListener('portfolio-theme', sync);
   }, []);
-  return <><motion.div className="reading-progress" style={{ scaleX: scrollYProgress }} aria-hidden="true" /><header className="site-header"><Link href="/" className="brand">knowprasad<span className="brand-period">.</span></Link><div className="header-actions"><SoundToggle /><button className="icon-button theme-key" onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`} title="Toggle theme">{theme === 'dark' ? <Moon size={17} /> : <Sun size={18} />}</button></div></header><SectionNavigation /></>;
+  return <><motion.div className="reading-progress" style={{ scaleX: scrollYProgress }} aria-hidden="true" /><header className="site-header"><a className="skip-link" href="#main">Skip to content</a><Link href="/" className="brand">knowprasad<span className="brand-period">.</span></Link><div className="header-actions"><SoundToggle /><button className="icon-button theme-key" onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`} title="Toggle theme">{theme === 'dark' ? <Moon size={17} /> : <Sun size={18} />}</button></div></header><SectionNavigation /></>;
 }
 export function Reveal({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return <div className={className}><div className="section-reveal">{children}</div></div>;
