@@ -265,6 +265,10 @@ The dock opens with its button, `/`, or Ctrl/Cmd+K. Its published-content index 
 
 The website generates canonical links, social metadata, structured data, robots and sitemap output. Substantive public pages can enter the sitemap; empty shelves/writing do not pretend to contain articles. `/llms.txt` is a machine-readable reading index. These are accessibility/discovery aids, not guaranteed search-engine or AI-chat rankings.
 
+Your published Notion Profile name/bio and Projects feed both the visible site and its machine-readable identity/reading index. Archive a project in Notion to remove it from the public project index; do not separately edit `llms.txt`. The profile schema connects Shubham Prasad, the knowprasad handle, the website and public social accounts. Agent reading guidance includes project availability and activity-history limitations; it never exposes contact email or private drafts.
+
+Google Search Console manages search discovery separately from deployment. The `knowprasad.me` domain property is already verified. Its submitted sitemap is `https://knowprasad.me/sitemap.xml`; Google periodically checks it for new routes. Use URL Inspection for a particular page's actual indexing status, then Test live URL to diagnose crawl access. Request indexing after a substantial change, not repeatedly for the same unchanged page. Google decides when to crawl/index and whether to show a result; a passing live test or AEO audit is not a ranking guarantee. No paid indexing service is required.
+
 Write useful titles and summaries. Keep URLs stable and images descriptive. Avoid publishing duplicate placeholder posts to make a page look busy. Updating the social sharing image or site-wide SEO wording is a code/asset change; link previews in other apps may cache old results for hours or days.
 
 ## 19. Routine maintenance

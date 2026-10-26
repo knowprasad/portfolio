@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { agentIndex, pageMetadata, profileStructuredData, projectStructuredData, serializeStructuredData, siteOrigin } from './seo';
-import { projects } from '../data/site';
+import { profile, projects } from '../data/site';
 
 describe('search metadata', () => {
   it('gives project pages their own canonical URL and description', () => {
@@ -31,5 +31,27 @@ describe('search metadata', () => {
     for (const project of projects) expect(text).toContain(`${siteOrigin}/projects/${project.slug}`);
     expect(text).not.toMatch(/@gmail|github\.com\/knowprasad\/pulse/);
     expect(text).toContain('snapshot date');
+  });
+  it('uses the published identity and connects the person, website and public profiles', () => {
+    const value = profileStructuredData({ ...profile, name: 'Published profile name', bio: 'Published profile biography.' });
+    expect(value.mainEntity.name).toBe('Published profile name');
+    expect(value.mainEntity.description).toBe('Published profile biography.');
+    expect(value.mainEntity.image).toBe(`${siteOrigin}/api/profile-photo`);
+    expect(value.mainEntity.sameAs).toEqual(expect.arrayContaining([profile.instagram, profile.substack]));
+    expect(value.isPartOf.alternateName).toBe(profile.handle);
+    expect(value.isPartOf.publisher['@id']).toBe(value.mainEntity['@id']);
+  });
+  it('does not revive archived or unpublished projects in the agent reading index', () => {
+    const text = agentIndex([projects[0]], { ...profile, bio: 'Published biography.' });
+    expect(text).toContain('Published biography.');
+    expect(text).toContain('/projects/merix');
+    expect(text).not.toContain('/projects/pulse');
+    expect(agentIndex([])).not.toContain('/projects/merix');
+    expect(text).toContain('## When to use this site');
+    expect(text).not.toContain('public messages are empty');
+  });
+  it('preserves absolute CMS cover images in project structured data', () => {
+    expect(projectStructuredData({ ...projects[0], image: 'https://example.com/cover.jpg' }).image).toBe('https://example.com/cover.jpg');
+    expect(projectStructuredData(projects[0]).image).toBe(`${siteOrigin}${projects[0].image}`);
   });
 });
