@@ -38,7 +38,7 @@ Latest owner choices supersede earlier alternatives. This is a delivery checklis
 - [x] Approved read-only Notion connection scoped to Portfolio CMS; token stored only in ignored/server environments.
 - [ ] Verify real draft → Published → edit → Archived cycle; no private/draft leaks.
 - [x] Published and verified on Vercel Hobby at https://prsdxportfolio-mauve.vercel.app; required server variables configured.
-- [x] Live 320px/390px phone layouts verified with no horizontal overflow; dark/light checks passed. Twenty live routes returned HTTP 200. Final source-layout release and Git integration remain separately pending.
+- [x] Live 320px/390px phone layouts verified with no horizontal overflow; dark/light checks passed. Twenty live routes returned HTTP 200. The site-folder release and GitHub-to-Vercel production deployment were verified.
 
 Account configuration was completed through the in-app browser after Chrome control failed. No paid service or framework reinstall was needed.
 
@@ -52,4 +52,8 @@ Do not add a separate Achievements section, copied reference achievements, fake 
 
 ## Release evidence
 
-The latest verified CMS deployment is dpl_anstW8Y4HrF23j17hd42wEG2Y6n1, serving https://knowprasad.me/. Its public output includes 21 tools and four projects, with no instructional project notes or Draft starter records. The subsequent search, provenance, private rate-limit and site-folder changes require their final source-linked release checks. The private database rate-limit fix was applied and verified with rolled-back insert/delete regressions. The latest complete application checks passed lint, TypeScript, 37 tests and production build before relocating the runtime; folder-move checks are recorded separately at completion.
+GitHub main commit `9dded1f42d5e2a1b8f1d6ad8a28fee197359784c` automatically deployed through the repository integration as `dpl_8DpDq6oLHiFzKC9vzfxQapT5qAK8`, READY and aliased to https://knowprasad.me/. The production app builds from `site/`; the retired Astro project's Git trigger is disconnected. All 39 tests, lint, TypeScript and the 24-route build passed locally; GitHub CI and Vercel Preview passed before merge. Seventeen representative production routes returned 200 after release.
+
+The live updated form returned an explicit saved/pending receipt, displayed the private submission directly below it, and allowed posting again. Diagnostic posts were deleted and their absence verified in the database. A rolled-back pin regression exposed only approved comments, with pins first; anonymous/authenticated visitors cannot insert or update the pin flag. The existing genuine pending message was left unchanged for owner moderation.
+
+The CMS output previously verified 21 tools and four projects without Draft starters or instructional notes. Mobile lab measurements and 320px/390px overflow checks are recorded in MOBILE-PERFORMANCE-AUDIT.md; these are measurements, not a guarantee for every device/network. Real owner writing, shelves, friends and a resume PDF remain content tasks.

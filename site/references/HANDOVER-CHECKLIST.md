@@ -32,7 +32,7 @@ This checklist distinguishes shipped functionality from personal content the own
 - Owner approved 35 existing content records: 1 profile, 4 projects, 9 work/highlight records and 21 tools. These are Published; book/article/watchlist/place/friend starters stay Draft.
 - Archived-to-Published lifecycle verified using an existing tool record before live publishing activation.
 - NOTION_TOKEN stored only in ignored local server environment and the portfolio's Vercel server environments.
-- Final deployed CMS-rendered output and GitHub/Vercel integration: verify at release completion; do not infer these from account setup alone.
+- GitHub main commit 9dded1f42d5e2a1b8f1d6ad8a28fee197359784c automatically deployed to production as dpl_8DpDq6oLHiFzKC9vzfxQapT5qAK8. Canonical guestbook receipt and private pending visibility were rechecked after release; diagnostic messages were removed.
 
 ## Quality evidence
 

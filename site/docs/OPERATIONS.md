@@ -114,7 +114,7 @@ There are two valid deployment methods:
 
 **Vercel CLI:** from the repository root, link to `prsdxportfolio`, verify that its Vercel Root Directory is `site`, authenticate with the owner account and run `npx vercel --prod`. The CLI uploads local source directly, then Vercel installs/builds it. This does not require a Git push and does not automatically synchronize GitHub. It explains how the first live versions were deployed while the repository still held the old source.
 
-**Git integration:** once the Vercel project is connected to `knowprasad/portfolio`, pushes to the configured production branch create production builds; other branches/PRs normally create previews. Check the final handover checklist for whether that connection has actually been verified. Never connect the project to an old branch and assume its source matches a locally uploaded deployment.
+**Git integration:** `prsdxportfolio` is connected to `knowprasad/portfolio`, with Root Directory `site` and production branch `main`. Pushes to main create production builds; other branches/PRs normally create previews. This was verified by the source-linked production release recorded in the checklist. The retired Astro project no longer triggers builds from this repository. Never connect the project to an old branch and assume its source matches a locally uploaded deployment.
 
 For a failed deploy, inspect Vercel Build Logs, confirm Node 24/framework Next.js/root directory/build command, check the required variable names, and run the same checks locally. Do not expose secret values while collecting logs.
 
