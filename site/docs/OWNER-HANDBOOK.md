@@ -112,6 +112,12 @@ The homepage shows up to four featured projects; if no project is marked Feature
 
 Avoid changing a published Slug casually: it changes the URL. If you rename one, ask for a redirect from the old URL so shared links keep working.
 
+### Consistent project details
+
+Project pages use five sections: **Overview & status**, **Screens & walkthrough**, **My role & ownership**, **Architecture & decisions**, and **Limitations & links**. Add these headings in the existing Notion project page body, then put your original details below each. No new database properties or code update is required. Existing About the project content maps to Overview; Current service note maps to Limitations. Unrecognized headings and blocks are preserved, rather than discarded. The Project status property supplies the status badge; Image/cover supplies the preview; Live URL and Source URL supply the public links.
+
+Missing ownership or architecture information stays explicitly undocumented until you provide it. Do not publish a generic template as if it describes your actual work. In Merix, add your specific responsibilities, system structure and the decisions you can explain; the existing paused-backend note is retained.
+
 ## 7. Work, experience and achievements
 
 Use **Work & highlights** for both kinds of entry.
@@ -232,6 +238,8 @@ After posting, the author immediately sees a public-post confirmation and the co
 Do not change the author's `user_id` or manually grant moderation rights to ordinary visitors. Supabase dashboard access is an owner privilege. Rejected messages remain private to their author/owner; delete only when you intend to remove them. There are no built-in automatic email notifications or a separate custom moderation dashboard.
 
 ## 16. GitHub and coding statistics
+
+The homepage shows compact platform totals. Open **Activity** from that section or the search dock for all platform tabs, streaks and contest history. Upstream PRs appear before the GitHub calendar so visitors can inspect concrete contributions first.
 
 GitHub contributions, merged/open/closed authored pull requests, peer-reviewed pull requests, and coding profiles are fetched automatically on the server. Activity reads are normally cached about one hour. GitHub profile metadata/photo fallback uses a shorter five-minute cache. You do not need to paste totals into Notion each day.
 

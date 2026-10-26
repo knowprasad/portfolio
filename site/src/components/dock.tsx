@@ -13,7 +13,7 @@ const fallbackProjectPaths = new Set(projects.map(project => `/projects/${projec
 const entries: Entry[] = [
   { title: 'Home', subtitle: 'A little about me', href: '/' }, { title: 'Projects', subtitle: 'Things I am building', href: '/projects' },
   ...projects.map(p => ({ title: p.name, subtitle: p.description, href: `/projects/${p.slug}` })),
-  ...[['Writing', '/writing'], ['Bookshelf', '/books'], ['Articles & papers', '/articles'], ['Watchlist', '/watchlist'], ['Channels', '/channels'], ['Places', '/places'], ['Leave a message', '/guestbook'], ['Résumé', '/resume'], ['Book a call', '/book']].map(([title, href]) => ({ title, subtitle: 'Page', href })),
+  ...[['Activity', '/activity'], ['Writing', '/writing'], ['Bookshelf', '/books'], ['Articles & papers', '/articles'], ['Watchlist', '/watchlist'], ['Channels', '/channels'], ['Places', '/places'], ['Leave a message', '/guestbook'], ['Résumé', '/resume'], ['Book a call', '/book']].map(([title, href]) => ({ title, subtitle: 'Page', href })),
   { title: 'Say hello', subtitle: 'Write me a message', action: 'compose' }, { title: 'Switch theme', subtitle: 'Light or dark', action: 'theme' }, { title: 'Local time', subtitle: 'The time in India', action: 'time' },
 ];
 const draftKey = 'portfolio-contact-draft';

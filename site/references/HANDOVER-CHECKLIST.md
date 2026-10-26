@@ -58,3 +58,7 @@ No extra webring, separate Achievements page, fake comments, invented reading li
 ## Owner update: automatic comments
 
 New signed-in guestbook and article comments publish immediately. Posting and author deletion invalidate the shared message cache immediately; owner hiding/pinning remains available in Supabase. The earlier pending-message tests above describe the former moderation mode.
+
+## Homepage inspection update
+
+The homepage now uses a compact three-platform coding summary linking to /activity. Detailed platform tabs, accepted-solution streaks and contest histories remain on that route. Open source shows three real merged PRs across repositories before the GitHub calendar; filters and expansion remain available. Project pages share five inspection sections, retain existing content, and clearly identify missing ownership/design notes. Added grouping/selection regressions bring the suite to 43 tests. Responsive checks verified 320px Activity and 390px project-page layouts without horizontal page overflow.

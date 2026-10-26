@@ -50,6 +50,7 @@ export function agentIndex() {
     '', '## Portfolio',
     `- [Home](${siteOrigin}/): Profile, work, highlights, coding activity and open-source contributions.`,
     `- [Projects](${siteOrigin}/projects): Full project collection.`,
+    `- [Activity](${siteOrigin}/activity): Detailed coding-platform history, accepted-solution streaks and source coverage.`,
     '', '## Projects',
     ...projects.map(project => `- [${project.name}](${siteOrigin}/projects/${project.slug}): ${project.detail} Status: ${project.status}.${project.github ? ` Public source: ${project.github}.` : ''}`),
     '', '## Public profiles',
@@ -57,7 +58,7 @@ export function agentIndex() {
     `- [LeetCode](${profile.leetcode})`, `- [Codeforces](https://codeforces.com/profile/${profile.codeforces})`,
     `- [CodeChef](https://www.codechef.com/users/${profile.codechef})`,
     '', '## Activity context',
-    'Activity counts can change. Read the visible source, snapshot date and history-coverage labels on the homepage before citing totals or streaks.',
+    'Activity counts can change. Read the visible source, snapshot date and history-coverage labels on the homepage or Activity page before citing totals or streaks.',
     'Projects in progress are labeled Building. Writing and public messages are empty until real entries are published.',
     '',
   ].join('\n');

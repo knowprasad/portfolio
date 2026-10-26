@@ -21,3 +21,9 @@ Current owner decisions · 25 October 2026. Supersedes historical alternatives i
 - Deploy through the existing authorized Vercel Hobby account after checks; no commit/push unless explicitly requested. Account-blocked integrations must be labeled honestly.
 
 See references/IMPLEMENTATION-AUDIT.md for actual delivery/verification status and the private Notion owner guide for editing instructions.
+
+## Inspection-focused content structure
+
+- Homepage problem solving is a compact platform summary linking to /activity; the complete All/LeetCode/Codeforces/CodeChef dashboard lives on that route.
+- Open source begins with a few actual merged upstream PRs across repositories, followed by full filters, contribution context and the calendar.
+- Every project detail page follows Overview & status, Screens & walkthrough, My role & ownership, Architecture & decisions, and Limitations & links. Existing body content is grouped by headings without rewriting it; missing owner detail is labelled honestly.

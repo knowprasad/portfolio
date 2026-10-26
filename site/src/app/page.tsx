@@ -6,12 +6,12 @@ import { BookingLink } from '@/components/booking-link';
 import { ProfileReveal } from '@/components/profile-reveal';
 import { SocialLinks } from '@/components/social-links';
 import { Experience, Highlights } from '@/components/experience';
-import { CodingProfiles } from '@/components/coding-profiles';
+import { CodingSummary } from '@/components/coding-summary';
 import { OpenSource } from '@/components/open-source';
 import { LeaveMessage } from '@/components/leave-message';
 import Link from 'next/link';
 import { ArrowUpRight, GitPullRequest, SquaresFour } from '@/components/icons';
-import { getGithubActivity, getLeetcodeActivity, getCodeforcesActivity, getCodechefActivity, getPullRequestActivity, getAcceptedLeetcodeDays, getContributorOwners } from '@/lib/activity-server';
+import { getGithubActivity, getLeetcodeActivity, getCodeforcesActivity, getCodechefActivity, getPullRequestActivity, getContributorOwners } from '@/lib/activity-server';
 import { getProjects, getProfile } from '@/lib/portfolio-content';
 import { OffClock } from '@/components/off-clock';
 import { WritingList } from '@/components/writing-list';
@@ -23,7 +23,7 @@ import { ProjectList } from '@/components/project-list';
 export const revalidate = 3600;
 export const metadata = { ...pageMetadata('/', 'Shubham Prasad · Developer', siteDescription), title: { absolute: 'Shubham Prasad · Developer' } };
 export default async function Home() {
-  const [github, leetcode, codeforces, codechef, activity, acceptedDays] = await Promise.all([getGithubActivity(), getLeetcodeActivity(), getCodeforcesActivity(), getCodechefActivity(), getPullRequestActivity(), getAcceptedLeetcodeDays()]);
+  const [github, leetcode, codeforces, codechef, activity] = await Promise.all([getGithubActivity(), getLeetcodeActivity(), getCodeforcesActivity(), getCodechefActivity(), getPullRequestActivity()]);
   const [projects, profile] = await Promise.all([getProjects(), getProfile()]);
   const selectedProjects = (projects.some(p=>p.featured) ? projects.filter(p=>p.featured) : projects).slice(0,4);
   const owners = await getContributorOwners(activity);
@@ -32,7 +32,7 @@ export default async function Home() {
     <Section id="projects" title="Projects" count={String(projects.length).padStart(2, '0')} href="/projects" action="All projects"><ProjectList projects={selectedProjects} /></Section>
     <Section id="work" title="Work & experience"><Experience /></Section>
     <Section id="highlights" title="Highlights"><Highlights activity={activity} /></Section>
-    <Section id="problem-solving" title="Problem solving" count="03 platforms"><CodingProfiles leetcode={leetcode} codeforces={codeforces} codechef={codechef} accepted={acceptedDays} /></Section>
+    <Section id="problem-solving" title="Problem solving" href="/activity" action="Full activity"><CodingSummary leetcode={leetcode} codeforces={codeforces} codechef={codechef} /></Section>
     <Section id="open-source" title="Open source" count={`${activity.merged.count} merged`}><OpenSource github={github} activity={activity} owners={owners} /></Section>
     <Section id="writing" title="Writing" href="/writing" action="All writing"><WritingList compact /></Section>
     <Section id="off-clock" title="Off the clock"><OffClock /></Section>
