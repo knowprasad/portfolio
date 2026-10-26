@@ -26,7 +26,7 @@ const publishedSource = unstable_cache(async (source: ContentSource): Promise<Co
     cursor = result.next_cursor;
   }
   return entries;
-}, ['portfolio-published-content-v1'], { revalidate: 300, tags: ['portfolio-content'] });
+}, ['portfolio-published-content-v2'], { revalidate: 300, tags: ['portfolio-content'] });
 export const getContent = cache(async (source: ContentSource): Promise<ContentEntry[] | null> => {
   if (!notionReady()) return null;
   try { return await publishedSource(source); } catch { return null; }

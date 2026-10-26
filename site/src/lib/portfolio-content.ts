@@ -3,12 +3,13 @@ import { projects, profile, friends, type Project, type Friend } from '@/data/si
 import { getContent } from './notion-server';
 import { publicUrl, publicImageUrl, slugSchema } from './content-model';
 import { getGithubProfile } from './github-profile-server';
+import { projectCollection } from './project-selection';
 export async function getProjects(): Promise<Project[]> {
   const entries = await getContent('projects');
   if (entries === null) return projects;
   return entries.filter(e => slugSchema.safeParse(e.values.Slug).success).map(e => {
     const previous = projects.find(p => p.slug === e.values.Slug);
-    return { slug:e.values.Slug,name:e.name,description:e.values.Summary || '',detail:e.values.Summary || '',tags:e.tags,url:publicUrl(e.values['Live URL']),github:publicUrl(e.values['Source URL']),image:publicImageUrl(e.values.Image) || previous?.image,imageKind:previous?.imageKind,status:e.values['Project status'] || 'Project',accent:previous?.accent || 'violet',featured:e.featured };
+    return { slug:e.values.Slug,name:e.name,description:e.values.Summary || '',detail:e.values.Summary || '',tags:e.tags,url:publicUrl(e.values['Live URL']),github:publicUrl(e.values['Source URL']),image:publicImageUrl(e.values.Image) || previous?.image,imageKind:previous?.imageKind,status:e.values['Project status'] || 'Project',accent:previous?.accent || 'violet',featured:e.featured,collection:projectCollection(e.values.Collection,previous?.collection) };
   });
 }
 export async function getProfile() {

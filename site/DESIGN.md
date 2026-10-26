@@ -21,3 +21,10 @@ output: DESIGN.md
 
 ## Reverse engineering evidence
 REA 6.7.0 statically analyzed the two shipped reader script chunks containing image, colour and code controls. Evidence `ev_f6975fcc7cd72b4915debb6838516a5a6b4f15c58359ed92ccb15462601f6dfa` is retained under ignored `test-results/app/reader-rea-focused.json`. The initial whole-bundle run timed out; the focused run completed. Its static observations do not prove runtime execution. Browser measurements/actions provide runtime visual evidence. Other 23 inventoried artifacts were outside focused analysis scope.
+
+# Projects: Xevrion archive reference
+Source: https://xevrion.dev/projects, captured 26 October 2026. Firecrawl branding/images and screenshot capture metadata live under `.firecrawl/xevrion-projects-*`; read-only DOM inspection establishes structure and motion classes.
+
+The reference uses a 640px archive with a breadcrumb, small introduction, then current projects as a single vertical list of wide preview cards. Cards have 20px corners, flat subtle surfaces, a 1200/420 desktop preview (1200/500 mobile), 40px icons, 15px titles, 14px/1.6 descriptions and 11px tags. On hover the preview scales to1.03, the icon rotates -6deg/scales1.05, and pressed main links scale the card to0.985. Smaller projects use compact icon rows. Recreate these mechanics with existing owned images/icons, no borrowed project claims or fake stars. No outer glow.
+
+Portfolio adaptation: only Current projects can appear on the homepage; Side quests live on /projects as compact rows. Preserve direct card-to-project-detail links and the GitHub README reader. No empty Past section. Published Notion Projects gain a Collection field so the owner can move work between Current projects and Side quests without editing code. Featured remains a homepage-selection flag within Current projects.

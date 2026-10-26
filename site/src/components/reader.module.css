@@ -1,4 +1,4 @@
-.reader { width:min(640px,calc(100% - 40px)); margin:0 auto; padding:76px 0 64px; position:relative; min-height:65dvh; }
+.reader { width:min(640px,100%); margin:0 auto; padding:76px 0 64px; position:relative; min-height:65dvh; }
 .reader::before { display:none; }
 .back { display:inline-flex; align-items:center; min-height:44px; margin-bottom:22px; color:var(--muted); font-size:14px; }
 .back:hover { color:var(--ink); }
@@ -80,3 +80,11 @@
 .reader :global(.article-comment-count) { margin-left:8px; color:var(--muted); font:12px/1.6 var(--font-mono),monospace; }
 .reader :global(.article-comment-prompt) { display:flex; align-items:center; flex-wrap:wrap; justify-content:space-between; gap:12px; padding:18px 0; margin-bottom:18px; border-block:1px solid var(--line); color:var(--muted); font-size:14px; }
 .reader :global(.article-comment-prompt) a { color:var(--ink); min-height:36px; display:inline-flex; align-items:center; }
+@media (max-width:600px), (pointer:coarse) {
+  .meta a { display:inline-flex; align-items:center; min-height:36px; }
+  .tags>a,.highlightToggle,.codeBar button,.closeImage { min-height:44px; }
+  .mobileContents summary { min-height:44px; }
+  .mobileContents a { display:block; min-height:44px; padding-block:12px; }
+  .reader :global(.article-actions) button { min-height:44px; }
+  .original { display:inline-flex; align-items:center; min-height:44px; }
+}
