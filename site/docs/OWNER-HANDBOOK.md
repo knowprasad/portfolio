@@ -239,7 +239,7 @@ Do not change the author's `user_id` or manually grant moderation rights to ordi
 
 ## 16. GitHub and coding statistics
 
-The homepage shows compact platform totals. Open **Activity** from that section or the search dock for all platform tabs, streaks and contest history. Upstream PRs appear before the GitHub calendar so visitors can inspect concrete contributions first.
+The homepage shows three combined figures: platform solves, rated contests and known best streak. Solves are added across platforms and may overlap; the streak is based on available accepted-solution history, not a claim of complete lifetime history. Unavailable platform totals are explicitly marked partial. Open **Explore activity** from that section or the search dock for individual platform tabs, source dates, streaks and contest history. Upstream PRs appear before the GitHub calendar so visitors can inspect concrete contributions first.
 
 GitHub contributions, merged/open/closed authored pull requests, peer-reviewed pull requests, and coding profiles are fetched automatically on the server. Activity reads are normally cached about one hour. GitHub profile metadata/photo fallback uses a shorter five-minute cache. You do not need to paste totals into Notion each day.
 
@@ -261,7 +261,7 @@ Theme and sound choices are saved in that browser. Sound starts off; the visitor
 
 ## 18. Search, SEO and discovery
 
-The dock opens with its button, `/`, or Ctrl/Cmd+K. It searches your published projects, writing/body text, shelves, places, friends and work/section entries. It does not search your entire private Notion workspace. An empty collection should not produce private draft search results.
+The dock opens with its button, `/`, or Ctrl/Cmd+K. Its published-content index downloads only when search is first opened; a loading notice appears while it arrives, and later opens reuse it during that page session. It searches your published projects, writing/body text, shelves, places, friends and work/section entries. It does not search your entire private Notion workspace. An empty collection should not produce private draft search results.
 
 The website generates canonical links, social metadata, structured data, robots and sitemap output. Substantive public pages can enter the sitemap; empty shelves/writing do not pretend to contain articles. `/llms.txt` is a machine-readable reading index. These are accessibility/discovery aids, not guaranteed search-engine or AI-chat rankings.
 

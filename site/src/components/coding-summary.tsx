@@ -1,12 +1,7 @@
-import Image from 'next/image';
-import type { CodechefActivity, CodeforcesActivity, LeetcodeActivity } from '@/lib/activity';
+import type { AcceptedHistory, CodechefActivity, CodeforcesActivity, LeetcodeActivity } from '@/lib/activity';
+import { combinedCodingSummary } from '@/lib/activity-metrics';
 
-export function CodingSummary({ leetcode, codeforces, codechef }: { leetcode: LeetcodeActivity; codeforces: CodeforcesActivity; codechef: CodechefActivity }) {
-  const platforms = [
-    { id: 'leetcode', name: 'LeetCode', solved: leetcode.solved },
-    { id: 'codeforces', name: 'Codeforces', solved: codeforces.solved },
-    { id: 'codechef', name: 'CodeChef', solved: codechef.solved },
-  ];
-  const saved = [leetcode.source, codeforces.source, codechef.source].includes('snapshot');
-  return <div className="coding-summary"><p className="section-intro">Practice across three platforms.</p><ul className="coding-summary-list">{platforms.map(platform => <li key={platform.id}><Image src={`/icons/${platform.id}.svg`} width={21} height={21} alt=""/><span>{platform.name}</span><strong>{platform.solved ?? '—'}</strong><span className="coding-summary-unit">{platform.solved == null ? 'unavailable' : 'solved'}</span></li>)}</ul><p className="data-date">{saved ? 'Includes saved public data. Source dates and history coverage are on the Activity page.' : 'Platform totals can include overlapping problems. History and source dates are on the Activity page.'}</p></div>;
+export function CodingSummary({ leetcode, codeforces, codechef, accepted }: { leetcode: LeetcodeActivity; codeforces: CodeforcesActivity; codechef: CodechefActivity; accepted: AcceptedHistory }) {
+  const summary = combinedCodingSummary(leetcode, codeforces, codechef, accepted);
+  return <div className="coding-summary"><p className="section-intro">One habit, across three platforms.</p><dl className="coding-summary-totals"><div><dt>{summary.partial ? 'Recorded platform solves' : 'Platform solves'}</dt><dd>{summary.solves.toLocaleString()}</dd></div><div><dt>{summary.partial ? 'Known rated contests' : 'Rated contests'}</dt><dd>{summary.contests.toLocaleString()}</dd></div><div><dt>Known best streak</dt><dd>{summary.streak.longest}<span> {summary.streak.longest === 1 ? 'day' : 'days'}</span></dd></div></dl><p className="data-date">Solves may overlap between platforms. Streaks use available accepted-solution history in India time.{summary.partial && ' A platform is unavailable; totals are partial.'}{summary.saved && ' Includes saved public data.'} Source dates and platform details are on the Activity page.</p></div>;
 }

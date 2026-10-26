@@ -1,0 +1,7 @@
+Google sign-in mark
+
+Source: https://developers.google.com/static/identity/images/g-logo.png
+Usage guidance: https://developers.google.com/identity/branding-guidelines
+Downloaded 2026-10-26. Resized proportionally to 40 x 40 pixels for a 20 x 20 CSS-pixel display.
+Google brand marks remain Google's trademarks; this asset is not covered by the Simple Icons CC0 notice.
+Used only to identify the Google authentication provider.

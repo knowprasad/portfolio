@@ -177,7 +177,9 @@ Fonts are self-hosted WOFF2. `font-display: optional` prevents a late font swap 
 
 ## Performance verification
 
-The mobile audit used official Chrome DevTools MCP in an isolated headless browser: 390×844, Slow 4G and 4× CPU slowdown. It recorded a post-fix median LCP of 2.1 seconds across three cold loads and CLS 0.00, compared with a pre-fix observed CLS of about 0.20. These are lab results, not a field-data guarantee or Lighthouse score; no INP score was established.
+The earlier font/layout audit used official Chrome DevTools MCP in an isolated headless browser: 390×844, Slow 4G and 4× CPU slowdown. It recorded a post-fix median LCP of 2.1 seconds across three cold loads and CLS 0.00, compared with a pre-fix observed CLS of about 0.20. That measurement predates README publishing. A subsequent README-enabled release measured homepage LCP 2.16/2.40/2.23 seconds and Merix 2.81/3.52/3.41 seconds under Slow 4G and 4× CPU slowdown, with CLS 0.00 in each run. These are lab results, not a field-data guarantee or Lighthouse score; no INP score was established. Detailed README pages should be measured separately from the homepage.
+
+The dock fetches `/api/search` and constructs its fuzzy index only after search is first requested, including the keyboard shortcut and returning from compose. Reopening reuses the index for that mounted dock. Keep a visible loading notice while the published index arrives, preserve the fallback navigation on failure, and verify that a closed dock makes no search request when changing this flow.
 
 When testing a new release, use the same conditions and report multiple runs if network variability matters. Also inspect 320px layout, keyboard focus, reduced motion, both themes and the actual public production URL. Do not claim all devices are fast from one successful desktop load.
 

@@ -1,6 +1,29 @@
 import { describe, expect, it } from 'vitest';
 import { parseCalendar, parseLeetcode, parseCodeforces, parseCodeforcesSolves, parseCodechef, parsePullRequests, solveStreak, parseCodechefAccepted, parseCodeforcesAcceptedDays, indianDate, monthlySubmissions } from './activity';
 import snapshot from '../data/leetcode-snapshot.json';
+import { combinedCodingSummary } from './activity-metrics';
+
+describe('combined homepage activity', () => {
+  const leetcode = parseLeetcode(snapshot.data, snapshot.fetchedAt, 'snapshot');
+  const codeforces = { ...parseCodeforces({ status: 'OK', result: [] }, 'prsdx', '2026-10-26'), solved: 8, acceptedDays: ['2026-10-24', '2026-10-25'] };
+  const codechef = parseCodechef('<label>Username:</label><span>prsdx</span><h3>Total Problems Solved: 2</h3><script>var all_rating = [];</script>', 'prsdx', '2026-10-26');
+
+  it('adds per-platform totals without claiming cross-platform uniqueness', () => {
+    const summary = combinedCodingSummary(leetcode, codeforces, codechef, { days: [], today: '2026-10-26', source: 'live', fetchedAt: '2026-10-26' });
+    expect(summary.solves).toBe(leetcode.solved + 10);
+    expect(summary.partial).toBe(false);
+    expect(summary.saved).toBe(true);
+  });
+  it('counts a shared solve day once and joins consecutive days across platforms', () => {
+    const summary = combinedCodingSummary(leetcode, codeforces, { ...codechef, acceptedDays: ['2026-10-26'] }, { days: ['2026-10-24'], today: '2026-10-26', source: 'live', fetchedAt: '2026-10-26' });
+    expect(summary.streak).toMatchObject({ activeDays: 3, longest: 3, current: 3 });
+  });
+  it('labels missing platform totals as partial rather than silently reporting zero', () => {
+    const summary = combinedCodingSummary(leetcode, { ...codeforces, available: false, solved: null }, codechef, { days: [], today: '2026-10-26', source: 'live', fetchedAt: '2026-10-26' });
+    expect(summary.partial).toBe(true);
+    expect(summary.solves).toBe(leetcode.solved + 2);
+  });
+});
 
 describe('public activity integrity', () => {
   it('does not turn a provider error into an empty contribution year', () => { expect(() => parseCalendar('<html>rate limited</html>')).toThrow(); });

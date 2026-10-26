@@ -1,4 +1,15 @@
-import type { LeetcodeActivity } from './activity';
+import type { AcceptedHistory, CodechefActivity, CodeforcesActivity, LeetcodeActivity } from './activity';
+
+export function combinedCodingSummary(leetcode: LeetcodeActivity, codeforces: CodeforcesActivity, codechef: CodechefActivity, accepted: AcceptedHistory) {
+  const solves = [leetcode.solved, codeforces.available ? codeforces.solved : null, codechef.available ? codechef.solved : null];
+  return {
+    solves: solves.reduce<number>((sum, value) => sum + (value ?? 0), 0),
+    partial: solves.some(value => value == null),
+    contests: leetcode.contests.length + codeforces.contests.length + codechef.contests.length,
+    streak: solveStreak([...accepted.days, ...(codeforces.acceptedDays ?? []), ...(codechef.acceptedDays ?? [])], accepted.today),
+    saved: [leetcode.source, codeforces.source, codeforces.acceptedSource, codechef.source, accepted.source].includes('snapshot'),
+  };
+}
 
 export function indianDate(timestamp: number) {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(timestamp * 1000));
