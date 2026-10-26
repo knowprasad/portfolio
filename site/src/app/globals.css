@@ -786,7 +786,7 @@ dialog {
   color: var(--accent);
   margin-top: 3px;
 }
-.pr-row>span:nth-child(2) {
+.pr-row>.pr-copy {
   flex: 1;
 }
 .pr-row strong {
