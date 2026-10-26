@@ -196,3 +196,11 @@ Back up Notion content, original media/PDFs, moderation data and owner account r
 ## Accessibility maintenance
 
 Keep every main landmark at id=main with tabIndex=-1 so the skip link moves keyboard focus. Keep visible button text in its accessible name; decorative typing pauses on keyboard focus. The contribution grid is a visual summary with an accessible date lookup rather than hundreds of tiny buttons. Contributor images use first-party optimization and a GitHub-symbol fallback. See references/ACCESSIBILITY-AUDIT.md for the actual WCAG test matrix, manual checks and limitations. Repeat browser accessibility checks after meaningful UI or content changes.
+
+## Project README publishing
+
+The project route loads published Notion context and public README content concurrently. src/lib/project-readme-server.ts provides request deduplication; project-readme.ts validates repository roots and fetches only raw.githubusercontent.com/{owner}/{repo}/HEAD/{README.md,readme.md,Readme.md}, without credentials, redirects or the GitHub REST quota. Source fetches revalidate after 900 seconds and project pages after 300 seconds. This is request-driven caching, not a scheduled synchronization guarantee. Existing successful Next fetch-cache entries can serve during revalidation; cold/provider failures retain the curated page with an honest unavailable state.
+
+project-readme-content.tsx renders on the server using react-markdown, GFM, rehype-raw followed by rehype-sanitize, then a trusted heading/ID namespace transform. No raw HTML is injected. readmeUrl resolves safe repository-relative destinations and restricts image hosts. Only the small image failure component is interactive. CSP img-src permits the same GitHub/raw/shields hosts required for repository media. Do not add runtime execution of Markdown code, auth headers to raw-host requests, unrestricted image proxying or arbitrary user-supplied fetch endpoints.
+
+Tests cover source URL validation, no credential forwarding, filename fallback, errors, byte limits, relative links, HTML/script stripping, namespaced emoji/duplicate anchors and accessible roadmap/code/table rendering.

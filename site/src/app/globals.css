@@ -3987,3 +3987,19 @@ main#main { scroll-margin-top: 110px; }
 .project-main:focus-visible::after { outline: 2px solid var(--ink); outline-offset: -3px; border-radius: 18px; }
 .stack-name { pointer-events: auto; }
 .stack-name::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 10px; }
+
+.readme-source { display:flex; flex-wrap:wrap; gap:6px 16px; font:13px/1.6 var(--font-mono),monospace; color:var(--muted); margin:12px 0 28px; }
+.readme-source a { overflow-wrap:anywhere; }
+.readme-document { overflow-wrap:anywhere; }
+.readme-document img { max-width:100%; height:auto; vertical-align:middle; }
+.readme-document pre { max-width:100%; overflow-x:auto; }
+.readme-document [id] { scroll-margin-top:120px; }
+.readme-document .article-table { max-width:100%; overflow-x:auto; }
+.readme-document table { min-width:0; }
+.readme-image-fallback,.readme-unavailable { color:var(--muted); font-size:14px; line-height:1.7; }
+.readme-document a { text-decoration:underline; text-underline-offset:3px; }
+.readme-document a:has(>img) { display:inline-flex; align-items:center; min-height:28px; margin:3px 5px 3px 0; }
+.readme-document a>img { width:auto; }
+.readme-document pre:focus-visible,.readme-document .article-table:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+.readme-document th { text-align:left; border:1px solid var(--line); padding:8px 12px; }
+.readme-task-state { display:inline-block; min-width:22px; color:var(--ink); }

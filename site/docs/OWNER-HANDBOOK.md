@@ -309,4 +309,13 @@ Sound is off until the visitor enables it in the header, and the preference stay
 
 ### Can project pages follow a GitHub README?
 
-Yes. A future read-only integration can fetch the README server-side from each approved Source URL, cache it and render it as a labelled repository-documentation section. It should sanitize Markdown/links and preserve a useful page when GitHub is unavailable. This release still uses your published Notion project body for its five-section case study; README synchronization is not enabled. Keep role, ownership and decision notes in Notion, since a README usually describes the product rather than your individual contribution.
+README synchronization is enabled. The main project documentation comes from the public repository linked in **Projects → Source URL**. Merix, PlateWise and YourTomo are connected. Pulse currently has no published Source URL and continues using its Notion body.
+
+1. Edit README.md in the project's default GitHub branch and commit the update there. Root files named readme.md or Readme.md are also supported.
+2. The portfolio fetches the public file on the server with a 15-minute source cache. Its project page also has a five-minute cache. Allow roughly 15–20 minutes plus provider delays and traffic-triggered refreshes; no portfolio code change or deployment is normally needed.
+3. Keep the project card's Name, Summary, Tags, current Project status, preview Image, Live URL and Source URL in Notion. These concise fields are not guessed from arbitrary README prose.
+4. Add optional context in the Notion project's record body: ownership, architecture decisions, walkthroughs or current limitations. Recognized section headings still group those notes. Empty ownership/architecture sections are omitted when the README is available.
+
+The **From the README** section names and links its source. It renders Markdown tables, lists, code, safe HTML and approved images. Relative files/images and section links are resolved for that repository. Executable HTML, embeds, arbitrary styles, unsafe URLs and unapproved image hosts are excluded; code examples are displayed as text and never run. Very large documents over 200 KB are rejected. Missing/unavailable documentation shows a GitHub link and keeps the Notion context usable. A repository rename requires updating Source URL; private repository READMEs are never fetched with credentials.
+
+The site does not rewrite or independently verify README claims. Keep README descriptions current, especially demo availability; the explicit Notion Project status remains visible above the documentation. If a diagram's host is unsupported, provide an image in the repository or ask for a reviewed host addition.

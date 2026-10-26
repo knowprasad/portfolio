@@ -26,4 +26,4 @@ See references/IMPLEMENTATION-AUDIT.md for actual delivery/verification status a
 
 - Homepage problem solving is a compact platform summary linking to /activity; the complete All/LeetCode/Codeforces/CodeChef dashboard lives on that route.
 - Open source begins with a few actual merged upstream PRs across repositories, followed by full filters, contribution context and the calendar.
-- Every project detail page follows Overview & status, Screens & walkthrough, My role & ownership, Architecture & decisions, and Limitations & links. Existing body content is grouped by headings without rewriting it; missing owner detail is labelled honestly.
+- Every project detail page keeps its explicit status and preview, with public repository README content as the primary documentation. Published Notion body content provides optional ownership, architecture and limitation notes. Empty ownership/architecture sections are omitted when README content is available; missing repository documentation keeps the curated fallback page usable. Source reads are public, credential-free and cached for 15 minutes.

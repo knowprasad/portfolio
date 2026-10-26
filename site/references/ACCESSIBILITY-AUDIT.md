@@ -42,3 +42,7 @@ The final 50-case matrix completed with zero detected violations and zero execut
 Automated checks do not establish complete WCAG conformance. A dedicated screen-reader pass, physical-device testing and the signed-in form in each assistive-technology/browser combination are outside this scan. Genuine production Google sign-in, posting, own deletion and sign-out were verified in earlier release checks; this audit did not publish test comments again.
 
 Future Notion content needs meaningful headings, descriptive link labels and image descriptions. Repeat these checks after significant UI or content changes. Keep both themes, mobile widths, keyboard focus and failure states in release verification.
+
+## README integration follow-up
+
+The project documentation update adds a focused 16-case matrix: Merix, PlateWise, YourTomo and the no-repository Pulse fallback, each in both themes at 1280px and 320px. The latest full matrix plus targeted header-table reruns have zero detected violations. README roadmap boxes are readable completion states, code blocks/tables are keyboard-scrollable, badge links have sufficient target size, and tables with empty column headings use existing row labels. Emoji/duplicate section anchors and linked-image failure markup have regressions. The suite now has 65 tests. Earlier whole-site results above remain the baseline; this follow-up does not claim every future README will automatically be accessible.

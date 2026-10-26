@@ -67,3 +67,7 @@ The homepage now uses a compact three-platform coding summary linking to /activi
 ## Interaction and accessibility release update
 
 Project cards now open their detail pages directly, including the image, title and card space; source/demo icons retain their destinations. The unused quick-view dialog was removed. Contributor avatars use first-party delivery with a symbol fallback; the profile image route was verified on Vercel Preview. Keyboard, contrast, daily contribution inspection and tooltip accessibility were repaired. See ACCESSIBILITY-AUDIT.md for test scope and limitations. The regression suite now includes 53 tests.
+
+## README publishing update
+
+Public repository READMEs are now the main project documentation, with source attribution, safe GFM/HTML, working repository-relative links and namespaced heading anchors. Notion retains card fields, current demo status and optional case-study context. Merix, PlateWise and YourTomo are connected; Pulse has no published Source URL yet. See the README workflow in docs/OWNER-HANDBOOK.md. Unavailable/private/oversized documents retain the curated page and an honest GitHub fallback.
