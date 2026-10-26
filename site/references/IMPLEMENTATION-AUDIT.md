@@ -57,3 +57,7 @@ GitHub main commit `9dded1f42d5e2a1b8f1d6ad8a28fee197359784c` automatically depl
 The live updated form returned an explicit saved/pending receipt, displayed the private submission directly below it, and allowed posting again. Diagnostic posts were deleted and their absence verified in the database. A rolled-back pin regression exposed only approved comments, with pins first; anonymous/authenticated visitors cannot insert or update the pin flag. The existing genuine pending message was left unchanged for owner moderation.
 
 The CMS output previously verified 21 tools and four projects without Draft starters or instructional notes. Mobile lab measurements and 320px/390px overflow checks are recorded in MOBILE-PERFORMANCE-AUDIT.md; these are measurements, not a guarantee for every device/network. Real owner writing, shelves, friends and a resume PDF remain content tasks.
+
+## Owner update: automatic comments
+
+New signed-in guestbook and article comments publish immediately. Posting and author deletion invalidate the shared message cache immediately; owner hiding/pinning remains available in Supabase. The earlier pending-message tests above describe the former moderation mode.

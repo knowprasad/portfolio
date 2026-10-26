@@ -211,21 +211,21 @@ Use appropriately sized images, usually under a few hundred kilobytes. Avoid upl
 
 ## 15. Guestbook and article comments
 
-Visitors sign in with Google, enter a display name and message, and submit it for review. Basic Google identity/email/profile is used for login; Gmail/Drive access is not requested. Public pages display the chosen display name, message and date, not the Google email address.
+Visitors sign in with Google, enter a display name and message, and post it immediately. Basic Google identity/email/profile is used for login; Gmail/Drive access is not requested. Public pages display the chosen display name, message and date, not the Google email address.
 
-New submissions start **pending**. They are visible to their author in Your submissions, but not to anonymous visitors. Authors can delete their own messages. Messages are limited to three submissions per user per ten minutes. Deleting a submission does not reset this quota.
+New submissions publish immediately; there is no approval queue for ordinary comments. Authors can delete their own messages. Messages are limited to three submissions per user per ten minutes. Deleting a submission does not reset this quota.
 
 ### Moderation steps
 
 1. Open the portfolio Supabase project, not Merix or Pulse.
 2. Go to Table Editor and open `guestbook_messages`.
 3. Review the `message`, `display_name`, `created_at` and `article_slug` fields.
-4. Change `status` to `approved` to publish, or `rejected` to keep it off public pages.
+4. New posts already have `status = approved`. Set it to `rejected` to hide spam or an unwanted comment; restore `approved` to show it again.
 5. Check the relevant page after its short public-message cache refresh (about one minute).
 
-**Pin a comment:** in the same `guestbook_messages` table, set its `status` to `approved` and its `pinned` checkbox to `true`, then save the row. Pinned messages sort before other approved messages and show a Pinned label. Several pins are allowed; the newest pinned message comes first. Set `pinned` back to `false` to unpin. Pinning a pending/rejected message does not publish it. The same control works for article discussions. Visitors cannot approve or pin their own messages. Allow about one minute for the public cache to refresh, then reload the page.
+**Pin a comment:** in the same `guestbook_messages` table, set its `status` to `approved` and its `pinned` checkbox to `true`, then save the row. Pinned messages sort before other approved messages and show a Pinned label. Several pins are allowed; the newest pinned message comes first. Set `pinned` back to `false` to unpin. Pinning a pending/rejected message does not publish it. The same control works for article discussions. Visitors cannot change moderation status or pin their own messages. Allow about one minute for the public cache to refresh, then reload the page.
 
-After posting, the author immediately sees a saved/pending confirmation and their private entry directly below the form. The public list contains approved messages only. Sign in using the same Google account to see that account's submissions. A successful post does not require typing it again.
+After posting, the author immediately sees a public-post confirmation and the comment in the public list. Posts and author deletions expire the public message cache immediately. The public list contains approved messages only. Sign in using the same Google account to see that account's submissions. A successful post does not require typing it again.
 
 `article_slug = null` means the general guestbook. A slug means an article discussion. The homepage previews up to three approved guestbook messages; `/guestbook` shows the larger list. Article Comments controls whether a published article accepts discussion.
 
@@ -263,7 +263,7 @@ Write useful titles and summaries. Keep URLs stable and images descriptive. Avoi
 
 **After a content edit:** check the public URL, the corresponding archive and a narrow phone view after cache refresh. Test its outbound links.
 
-**Weekly, when you receive messages:** review pending submissions. Confirm the contact and booking destinations still work.
+**Weekly, when you receive messages:** check for spam or unwanted public comments and hide them if needed. Confirm the contact and booking destinations still work.
 
 **Monthly:** check Vercel/Supabase usage, test Google sign-in/sign-out, and back up your Notion CMS. Keep the domain renewal date and payment/contact details current in Namecheap. Domain auto-renew was not enabled as part of this work; verify your preference yourself.
 
@@ -284,7 +284,7 @@ Write useful titles and summaries. Keep URLs stable and images descriptive. Avoi
 | A PDF asks for login | Use a signed-out-accessible PDF URL, not an editing/share screen |
 | Statistics are older than your provider | Read source/date label; allow the activity cache; provider may be blocking/rate-limiting reads |
 | Google login returns an error | Check canonical domain, Supabase allow-list, provider status and Google client callback; see OPERATIONS.md |
-| A message is not public | It is pending/rejected, article comments are disabled, or the public message cache has not refreshed |
+| A message is not public | It was hidden by the owner, article comments are disabled, or the provider request failed |
 | The contact form did not deliver | The default contact action opens an email draft; check the mail client and Sent folder |
 | The site is unavailable | Check Vercel deployment, domain DNS and provider status; do not change nameservers or buy hosting as a first response |
 

@@ -1,7 +1,7 @@
 'use server';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, updateTag } from 'next/cache';
 import { authClient } from '@/lib/supabase-server';
 import { googleSignInReady, safeAppOrigin, authConfig } from '@/lib/auth-config';
 import { slugSchema } from '@/lib/content-model';
@@ -35,10 +35,11 @@ export async function postMessage(_previous: { message: string; success: boolean
   if (article) { const parsed = slugSchema.safeParse(article); if (!parsed.success) return {message:'This discussion is unavailable.',success:false}; const post=await getArticle(parsed.data); if(!post || post.values.Comments!=='true') return {message:'Comments are closed on this article.',success:false}; articleSlug=parsed.data; }
   const { error } = await client.from('guestbook_messages').insert({ user_id: user.id, display_name: input.data.name, message: input.data.message, article_slug: articleSlug });
   if (error) return { message: error.code === 'P0001' ? 'Please wait ten minutes before leaving another message.' : 'Your message could not be saved. Please try again.', success: false };
+  updateTag('guestbook-messages');
   revalidatePath('/guestbook');
   revalidatePath('/');
   if(articleSlug) revalidatePath(`/writing/${articleSlug}`);
-  return { message: 'Saved successfully. Your message is pending review, so it is not public yet. You can see it below in Your submissions.', success: true };
+  return { message: 'Your message is now public. Thanks for stopping by!', success: true };
 }
 
 export async function deleteOwnMessage(form: FormData) {
@@ -46,6 +47,7 @@ export async function deleteOwnMessage(form: FormData) {
   const {data:{user}}=await client.auth.getUser(); if(!user)return;
   const id=form.get('id'); if(typeof id!=='string' || !/^[a-f0-9-]{36}$/i.test(id))return;
   const {data}=await client.from('guestbook_messages').delete().eq('id',id).eq('user_id',user.id).select('article_slug');
+  updateTag('guestbook-messages');
   revalidatePath('/guestbook'); revalidatePath('/');
   for(const row of data || []) if(slugSchema.safeParse(row.article_slug).success) revalidatePath(`/writing/${row.article_slug}`);
 }

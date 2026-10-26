@@ -150,7 +150,7 @@ For an urgent content fix, first change the record's Publish state, then invalid
 
 ## Supabase and message moderation
 
-The database schema is recorded under `supabase/migrations/`. Review changes before applying them to the actual portfolio project. RLS must remain enabled. The authenticated role may submit only its own pending messages and delete its own rows; it cannot self-approve or impersonate another author. Anonymous reads expose approved public fields only.
+The database schema is recorded under `supabase/migrations/`. Review changes before applying them to the actual portfolio project. RLS must remain enabled. The authenticated role may submit only its own immediately public messages and delete its own rows; it cannot modify moderation status, set pins or impersonate another author. Anonymous reads expose approved public fields only.
 
 Never use editable `user_metadata` as an authorization role. Public display names are presentation, not permissions. The app verifies the server-side user identity before writes. The posting limit is enforced using a private per-account timestamp ledger that is independent of deletable message rows. Deleting a message does not reset the three-post rolling ten-minute quota.
 

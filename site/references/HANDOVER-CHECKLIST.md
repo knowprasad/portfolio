@@ -54,3 +54,7 @@ This checklist distinguishes shipped functionality from personal content the own
 | Original writing | Full Writing record body, metadata and publication choice |
 
 No extra webring, separate Achievements page, fake comments, invented reading list or automatic Medium publishing was added. These were explicitly excluded or depend on owner choices.
+
+## Owner update: automatic comments
+
+New signed-in guestbook and article comments publish immediately. Posting and author deletion invalidate the shared message cache immediately; owner hiding/pinning remains available in Supabase. The earlier pending-message tests above describe the former moderation mode.

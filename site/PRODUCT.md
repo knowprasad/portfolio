@@ -15,7 +15,7 @@ Current owner decisions · 25 October 2026. Supersedes historical alternatives i
 - Original anime avatar/favicon, click to reveal the owner’s photo. Sound defaults off, remembers choice, and plays only after explicit opt-in. Keyboard and reduced motion are required.
 - Notion Portfolio CMS is the editor for routine content. Exactly eight scoped data sources; Draft/Published/Archived, ordering and featured flags. Public routes/search may read only Published records. Five-minute request-driven caches, not instant scheduled publishing.
 - Writing supports full safe article bodies, contents, reading time, copy/share and moderated comments. Notion and Medium are separate publishing destinations; canonical links support manual cross-posting, not automatic Medium publishing.
-- Supabase handles Google auth, reviewed public messages/comments and an approximate hashed-browser visitor count. Enforce row-level authorization and posting limits; private email and pending messages stay private.
+- Supabase handles Google auth, immediately published public messages/comments with owner removal/pinning and an approximate hashed-browser visitor count. Enforce row-level authorization and posting limits; private email and pending messages stay private.
 - Real résumé PDF only: Notion Profile > Resume PDF, RESUME_URL, or public/resume.pdf. No document was supplied yet.
 - SEO: server HTML, canonical URLs, truthful JSON-LD, social previews, sitemap/robots and optional llms.txt. No promise of ranking in search/chat apps.
 - Deploy through the existing authorized Vercel Hobby account after checks; no commit/push unless explicitly requested. Account-blocked integrations must be labeled honestly.
