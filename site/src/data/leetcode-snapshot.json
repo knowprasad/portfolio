@@ -1,0 +1,40 @@
+{
+  "fetchedAt": "2026-10-24T15:45:28.4612432Z",
+  "data": {
+    "matchedUser": {
+      "username": "knowprasad",
+      "submitStatsGlobal": {
+        "acSubmissionNum": [
+          {
+            "difficulty": "All",
+            "count": 26
+          },
+          {
+            "difficulty": "Easy",
+            "count": 13
+          },
+          {
+            "difficulty": "Medium",
+            "count": 11
+          },
+          {
+            "difficulty": "Hard",
+            "count": 2
+          }
+        ]
+      },
+      "userCalendar": {
+        "activeYears": [
+          2025,
+          2026
+        ],
+        "streak": 2,
+        "totalActiveDays": 14,
+        "submissionCalendar": "{\"1768780800\": 1, \"1781136000\": 2, \"1785283200\": 3, \"1785369600\": 2, \"1785888000\": 2, \"1786406400\": 1, \"1786492800\": 1, \"1787184000\": 8, \"1788393600\": 2, \"1790640000\": 1, \"1791936000\": 6, \"1762646400\": 2, \"1762732800\": 2, \"1763683200\": 2}"
+      }
+    },
+    "userContestRanking": null,
+    "userContestRankingHistory": []
+  },
+  "username": "knowprasad"
+}

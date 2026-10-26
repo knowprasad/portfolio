@@ -1,0 +1,34 @@
+{
+  "profile": {
+    "sourceId": "74df6cfd-8759-4e70-a1be-ed66ca88407b",
+    "databaseId": "fe081336525d466f9d1881d4901b3735"
+  },
+  "work": {
+    "sourceId": "efedd10e-56ea-418b-98fa-66e9e5951da0",
+    "databaseId": "dd2406960e1b4e1b9b2ca5c64da608f8"
+  },
+  "projects": {
+    "sourceId": "74b8cdbe-c66f-47c3-9100-a0745649de39",
+    "databaseId": "ec8f6262e49e4377b400bdfbf61531c5"
+  },
+  "writing": {
+    "sourceId": "db945974-e666-438c-8c6a-73dcc163bb28",
+    "databaseId": "7b3ff548f9b349af8814271683d96ce3"
+  },
+  "library": {
+    "sourceId": "c564f2db-6116-47aa-9694-881a0845cbb7",
+    "databaseId": "a82e35bc1eff4513b907cadbab29162c"
+  },
+  "places": {
+    "sourceId": "833da731-99c6-44cd-af59-0f8758545985",
+    "databaseId": "45b6d63f6b6b4018a2c1cfed8e1bc553"
+  },
+  "friends": {
+    "sourceId": "418f1da3-830f-4d44-8721-c8a86162e58c",
+    "databaseId": "622115d21abf47d4b70e2c449de4bc91"
+  },
+  "stack": {
+    "sourceId": "c0481b9f-6334-4a0b-b443-b382ac15e626",
+    "databaseId": "d244e43c85c9410cb25c19d08a994587"
+  }
+}

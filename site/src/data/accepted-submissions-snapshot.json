@@ -1,0 +1,107 @@
+{
+  "data": {
+    "recentAcSubmissionList": [
+      {
+        "id": "2172522820",
+        "timestamp": "1792011727",
+        "title": "Sort Colors"
+      },
+      {
+        "id": "2172008182",
+        "timestamp": "1791971388",
+        "title": "Count of Smaller Numbers After Self"
+      },
+      {
+        "id": "2171792567",
+        "timestamp": "1791953893",
+        "title": "Top K Frequent Elements"
+      },
+      {
+        "id": "2171753372",
+        "timestamp": "1791950779",
+        "title": "Kth Largest Element in an Array"
+      },
+      {
+        "id": "2156960967",
+        "timestamp": "1790677028",
+        "title": "Validate Binary Search Tree"
+      },
+      {
+        "id": "2129494552",
+        "timestamp": "1788431058",
+        "title": "Merge k Sorted Lists"
+      },
+      {
+        "id": "2129472753",
+        "timestamp": "1788429616",
+        "title": "Merge Two Sorted Lists"
+      },
+      {
+        "id": "2113830501",
+        "timestamp": "1787223117",
+        "title": "Valid Anagram"
+      },
+      {
+        "id": "2113822547",
+        "timestamp": "1787222578",
+        "title": "Two Sum"
+      },
+      {
+        "id": "2113805932",
+        "timestamp": "1787221507",
+        "title": "Intersection of Two Arrays"
+      },
+      {
+        "id": "2113789070",
+        "timestamp": "1787220520",
+        "title": "Contains Duplicate"
+      },
+      {
+        "id": "2104025425",
+        "timestamp": "1786529210",
+        "title": "Design Browser History"
+      },
+      {
+        "id": "2102687076",
+        "timestamp": "1786443843",
+        "title": "Min Stack"
+      },
+      {
+        "id": "2095186418",
+        "timestamp": "1785926014",
+        "title": "Non-overlapping Intervals"
+      },
+      {
+        "id": "2087358068",
+        "timestamp": "1785407108",
+        "title": "Rotate Array"
+      },
+      {
+        "id": "2085974197",
+        "timestamp": "1785320574",
+        "title": "Valid Mountain Array"
+      },
+      {
+        "id": "2029243744",
+        "timestamp": "1781151459",
+        "title": "Largest Number"
+      },
+      {
+        "id": "1889975586",
+        "timestamp": "1768834799",
+        "title": "Two Sum"
+      },
+      {
+        "id": "1835638927",
+        "timestamp": "1763693366",
+        "title": "Find Customer Referee"
+      },
+      {
+        "id": "1835633920",
+        "timestamp": "1763692690",
+        "title": "Recyclable and Low Fat Products"
+      }
+    ]
+  },
+  "fetchedAt": "2026-10-25T02:11:55.3282618+00:00"
+}

@@ -25,3 +25,15 @@ pnpm-debug.log*
 
 # graphify knowledge graph
 graphify-out/
+
+# Current website and local tooling
+/.env*
+!/.env.example
+/.vercel/
+/.next/
+/test-results/
+/references/
+*.tsbuildinfo
+
+# Retained private research captures
+/.firecrawl/
