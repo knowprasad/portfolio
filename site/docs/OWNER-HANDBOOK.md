@@ -147,12 +147,16 @@ Use **Writing** for articles you wrote. Use Personal Library for articles writte
 1. Add Name, a unique Slug and a short Summary.
 2. Set the Published date property, Tags, and an optional Cover.
 3. Write the full article in the record body, using native Notion blocks.
-4. Set Comments if you want a moderated discussion beneath this article.
+4. Set Comments if you want a discussion beneath this article. Signed-in messages publish immediately; owner removal/pinning remains available.
 5. Set Featured if it should be included in the compact homepage list.
 6. Review the complete draft, then set Publish = Published.
 7. Check `/writing` and `/writing/your-slug`, including headings, links, images and mobile reading.
 
 The homepage shows up to three featured articles, or the latest three when none are featured. The archive shows all published articles. Published body text enters the site's search index, subject to the documented bounded indexing limit.
+
+**Images and covers:** you can upload images directly from your computer into the Notion article body; Google Drive and a separately hosted URL are not required. A first body image works as the website article banner. Notion's top-of-page Add cover decorates the Notion page, and the Cover property stores optional cover metadata; the current text-only Writing list and article header do not automatically display either as a banner. For the ten imported Hashnode articles, each available cover was also copied into the body, and all cover/inline images were uploaded into Notion. Edit or replace those native image blocks directly.
+
+The imported articles retain their original publication dates and Hashnode Canonical URL values. Their dates are not reset to the import date. The untouched Draft starter remains available to duplicate for your next article. A worked example was added to the private Notion quick-start guide, using DNS Record Types Explained.
 
 Supported body blocks: paragraphs, headings, bulleted/numbered lists, quotes, callouts, code, images, tables and toggles. Avoid relying on arbitrary embeds, raw HTML, scripts, private synced blocks or child-page content. Unsupported blocks do not become executable website content.
 

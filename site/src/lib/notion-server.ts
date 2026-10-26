@@ -42,18 +42,18 @@ async function blocks(id: string, depth = 0): Promise<ContentBlock[]> {
     const result = await request(`blocks/${id}/children?page_size=100${cursor ? `&start_cursor=${encodeURIComponent(cursor)}` : ''}`);
     for (const row of result.results) {
       if (typeof row.id !== 'string' || typeof row.type !== 'string') continue;
-      const data = row[row.type] as { rich_text?: unknown; caption?: unknown; language?: string; external?: { url?: string }; file?: { url?: string }; cells?: unknown[][] } | undefined;
+      const data = row[row.type] as { rich_text?: unknown; caption?: unknown; language?: string; external?: { url?: string }; file?: { url?: string }; cells?: unknown[][]; has_column_header?: boolean; has_row_header?: boolean } | undefined;
       // Do not follow synced blocks, child pages, embeds or arbitrary URLs.
       const supported = ['paragraph','heading_1','heading_2','heading_3','bulleted_list_item','numbered_list_item','quote','callout','code','divider','image','toggle','table','table_row'];
       if (!supported.includes(row.type)) { output.push({ id: row.id, type: 'unsupported', text: [], children: [] }); continue; }
-      output.push({ id: row.id, type: row.type, text: rich(data?.rich_text || data?.caption), children: row.has_children ? await blocks(row.id, depth + 1) : [], url: publicImageUrl(data?.external?.url || data?.file?.url), language: data?.language, rows: data?.cells ? [data.cells.map(cell => rich(cell).map(t => t.text).join(''))] : undefined });
+      output.push({ id: row.id, type: row.type, text: rich(data?.rich_text || data?.caption), children: row.has_children ? await blocks(row.id, depth + 1) : [], url: publicImageUrl(data?.external?.url || data?.file?.url), language: data?.language, rows: data?.cells ? [data.cells.map(cell => rich(cell).map(t => t.text).join(''))] : undefined, ...(row.type === 'table' ? { tableHeaderRow: data?.has_column_header === true, tableHeaderColumn: data?.has_row_header === true } : {}) });
     }
     if (!result.has_more || !result.next_cursor) break;
     cursor = result.next_cursor;
   }
   return output;
 }
-const publishedBody = unstable_cache(blocks, ['portfolio-article-body-v1'], { revalidate: 300, tags: ['portfolio-content'] });
+const publishedBody = unstable_cache(blocks, ['portfolio-article-body-v2'], { revalidate: 300, tags: ['portfolio-content'] });
 export async function getArticle(slug: string) {
   const entries = await getContent('writing');
   const entry = entries?.find(row => row.values.Slug === slug);

@@ -19,11 +19,15 @@ export function ContentBlocks({ blocks }: { blocks: ContentBlock[] }) {
       case 'heading_3': output.push(<h3 id={headingId(block)} key={block.id}>{text}</h3>); break;
       case 'quote': output.push(<blockquote key={block.id}>{text}{children}</blockquote>); break;
       case 'callout': output.push(<aside className="article-callout" key={block.id}>{text}{children}</aside>); break;
-      case 'code': output.push(<pre key={block.id}><code>{block.text.map(t => t.text).join('')}</code></pre>); break;
+      case 'code': output.push(<pre key={block.id} tabIndex={0} role="group" aria-label="Code example"><code>{block.text.map(t => t.text).join('')}</code></pre>); break;
       case 'image': if (block.url) output.push(<figure key={block.id}><Image src={block.url} unoptimized width={1200} height={800} alt={block.text.map(t => t.text).join('')} style={{ width: '100%', height: 'auto' }}/>{block.text.length > 0 && <figcaption>{text}</figcaption>}</figure>); break;
       case 'divider': output.push(<hr key={block.id}/>); break;
       case 'toggle': output.push(<details key={block.id}><summary>{text}</summary>{children}</details>); break;
-      case 'table': output.push(<div className="article-table" key={block.id}><table><tbody>{block.children.flatMap(row => row.rows || []).map((row, n) => <tr key={n}>{row.map((cell, c) => <td key={c}>{cell}</td>)}</tr>)}</tbody></table></div>); break;
+      case 'table': {
+        const rows = block.children.flatMap(row => row.rows || []);
+        const header = block.tableHeaderRow ? rows[0] : undefined;
+        output.push(<div className="article-table" key={block.id} tabIndex={0} role="group" aria-label="Article table"><table>{header && <thead><tr>{header.map((cell, c) => <th key={c} scope="col">{cell}</th>)}</tr></thead>}<tbody>{rows.slice(header ? 1 : 0).map((row, n) => <tr key={n}>{row.map((cell, c) => block.tableHeaderColumn && c === 0 ? <th key={c} scope="row">{cell}</th> : <td key={c}>{cell}</td>)}</tr>)}</tbody></table></div>); break;
+      }
       case 'unsupported': output.push(<p className="message-note" key={block.id}>This content format is not available in the web edition.</p>); break;
       default: output.push(<div key={block.id}><p>{text}</p>{children}</div>);
     }

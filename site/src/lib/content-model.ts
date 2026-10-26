@@ -8,7 +8,7 @@ export function publicUrl(value: unknown): string | undefined {
 export const contentImageHosts = ['github.com','avatars.githubusercontent.com','prod-files-secure.s3.us-west-2.amazonaws.com','s3.us-west-2.amazonaws.com','images.unsplash.com'];
 export function publicImageUrl(value: unknown) { const url=publicUrl(value); return url && contentImageHosts.includes(new URL(url).hostname) ? url : undefined; }
 export type RichText = { text: string; href?: string; bold?: boolean; italic?: boolean; code?: boolean; strike?: boolean };
-export type ContentBlock = { id: string; type: string; text: RichText[]; children: ContentBlock[]; url?: string; language?: string; rows?: string[][] };
+export type ContentBlock = { id: string; type: string; text: RichText[]; children: ContentBlock[]; url?: string; language?: string; rows?: string[][]; tableHeaderRow?: boolean; tableHeaderColumn?: boolean };
 export type ContentEntry = { id: string; name: string; values: Record<string, string>; tags: string[]; featured: boolean; blocks?: ContentBlock[] };
 type Property = { type?: string; title?: { plain_text?: string }[]; rich_text?: { plain_text?: string }[]; select?: { name: string } | null; multi_select?: { name: string }[]; url?: string | null; date?: { start: string } | null; checkbox?: boolean; number?: number | null };
 export function normalizePublishedPage(input: unknown): ContentEntry | null {

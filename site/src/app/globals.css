@@ -3967,6 +3967,9 @@ dialog { box-shadow:var(--shadow-dialog); }
 @media (max-width: 600px) { .project-case-study .project-detail-section h2 { font-size: 23px; }.coding-summary-totals { gap:12px; }.coding-summary-totals dd { font-size:28px; }.coding-summary-totals dt { font-size:13px; }.oss-first { align-items: flex-start; gap: 8px; flex-wrap: wrap; } }
 
 .project-page-heading > .project-title-text { color: var(--ink); }
+.article-prose pre:focus-visible,.article-table:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+.article-table th { border:1px solid var(--line); padding:8px 12px; text-align:left; font-weight:600; }
+.article-prose a { text-decoration:underline; text-underline-offset:.16em; }
 
 .github-avatar { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; border-radius: inherit; background: var(--surface); color: var(--muted); vertical-align: middle; }
 .github-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
