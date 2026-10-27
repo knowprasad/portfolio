@@ -4094,6 +4094,7 @@ main#main { scroll-margin-top: 110px; }
 /* A quiet inquiry at the very end of the footer. */
 .footer-service { margin-top:28px; padding-top:20px; border-top:1px dashed var(--line); }
 .footer-service h2 { margin:0; font-size:14px; font-weight:500; line-height:1.6; }
+.footer-service p { max-width:56ch; margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.8; }
 .footer-service-links { display:flex; flex-wrap:wrap; gap:4px 20px; margin-top:4px; }
 .footer-service-links a { display:inline-flex; align-items:center; gap:6px; min-height:44px; color:var(--muted); font-size:13px; text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:4px; }
 .footer-service-links a:hover { color:var(--ink); text-decoration-color:var(--muted); }
