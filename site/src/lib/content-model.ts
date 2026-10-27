@@ -5,7 +5,7 @@ export function publicUrl(value: unknown): string | undefined {
   if (typeof value !== 'string') return;
   try { const url = new URL(value); if (url.protocol === 'https:' && !url.username && !url.password && !url.port && !/^(localhost|127\.|0\.|\[|10\.|192\.168\.)/i.test(url.hostname)) return url.href; } catch { /* Invalid content is omitted. */ }
 }
-export const contentImageHosts = ['github.com','avatars.githubusercontent.com','prod-files-secure.s3.us-west-2.amazonaws.com','s3.us-west-2.amazonaws.com','images.unsplash.com'];
+export const contentImageHosts = ['knowprasad.me','github.com','avatars.githubusercontent.com','prod-files-secure.s3.us-west-2.amazonaws.com','s3.us-west-2.amazonaws.com','images.unsplash.com','covers.openlibrary.org','upload.wikimedia.org','thumb.wikimedia.org','substackcdn.com','substack-post-media.s3.amazonaws.com','miro.medium.com','cdn.hashnode.com','media2.dev.to','yt3.googleusercontent.com'];
 export function publicImageUrl(value: unknown) { const url=publicUrl(value); return url && contentImageHosts.includes(new URL(url).hostname) ? url : undefined; }
 export type RichText = { text: string; href?: string; bold?: boolean; italic?: boolean; code?: boolean; strike?: boolean };
 export type ContentBlock = { id: string; type: string; text: RichText[]; children: ContentBlock[]; url?: string; language?: string; rows?: string[][]; tableHeaderRow?: boolean; tableHeaderColumn?: boolean };

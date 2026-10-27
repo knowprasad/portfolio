@@ -3,6 +3,7 @@ import { getContent, getArticle } from '@/lib/notion-server';
 import { getProjects } from '@/lib/portfolio-content';
 import { slugSchema, plainBlocks } from '@/lib/content-model';
 import { shelves } from '@/data/shelves';
+import {libraryKind,collectionSlug} from '@/lib/collection-content';
 import { getProjectReadme } from '@/lib/project-readme-server';
 export const revalidate = 300;
 export async function GET() {
@@ -11,10 +12,10 @@ export async function GET() {
   const posts = [];
   // Bound body retrieval; caches are shared with the reading routes.
   for (const entry of entries.slice(0,100)) { const post = await getArticle(entry.values.Slug); if (post) posts.push({title:post.name,subtitle:post.values.Summary,body:plainBlocks(post.blocks),href:`/writing/${post.values.Slug}`}); }
-  const libraryEntries=(library || []).map(e=>({title:e.name,subtitle:e.values.Summary || e.values.Creator || '',href:`/${e.values.Shelf==='Books'?'books':e.values.Shelf==='Watchlist'?'watchlist':e.values.Shelf==='Channels'?'channels':'articles'}`}));
+  const libraryEntries=(library||[]).flatMap(e=>{const kind=libraryKind(e);return kind?[{title:e.name,subtitle:e.values.Summary||e.values.Creator||'',body:e.values['My take']||'',href:`/${kind}/${collectionSlug(e)}`}]:[];});
   const projectEntries = await Promise.all(projects.map(async project => {
     const readme = await getProjectReadme(project.github);
     return { title: project.name, subtitle: project.description, body: `${project.detail}\n${readme?.markdown || ''}`, href: `/projects/${project.slug}` };
   }));
-  return NextResponse.json([...projectEntries,...posts,...libraryEntries,...(places || []).map(e=>({title:e.name,subtitle:e.values.Summary || e.values.Country || '',href:'/places'})),...(friends || []).map(e=>({title:e.name,subtitle:e.values.Summary || 'Around the web',href:'/#friends'})),...(work || []).map(w=>({title:w.name,subtitle:w.values.Summary,body:w.values.Organization,href:w.values.Kind==='Highlight'?'/#highlights':'/#work'})),...Object.entries(shelves).map(([slug,s])=>({title:s.title,subtitle:s.description,href:`/${slug}`})),{title:'Tech stack & tools',subtitle:'TypeScript JavaScript Python React Next.js FastAPI Supabase Git',href:'/#stack'},{title:'Open source',subtitle:'GitHub contributions merged open closed pull requests peer reviews',href:'/#open-source'},{title:'Activity',subtitle:'LeetCode Codeforces CodeChef contest history accepted problems streak calendar',href:'/activity'},{title:'Highlights',subtitle:'Achievements scholarships contributions and personal milestones',href:'/#highlights'}],{headers:{'Cache-Control':'public, s-maxage=300, stale-while-revalidate=600'}});
+  return NextResponse.json([...projectEntries,...posts,...libraryEntries,...(places || []).map(e=>({title:e.name,subtitle:e.values.Summary || e.values.Country || "",body:e.values["My take"]||"",href:`/places/${collectionSlug(e)}`})),...(friends || []).map(e=>({title:e.name,subtitle:e.values.Summary || 'Around the web',href:'/#friends'})),...(work || []).map(w=>({title:w.name,subtitle:w.values.Summary,body:w.values.Organization,href:w.values.Kind==='Highlight'?'/#highlights':'/#work'})),...Object.entries(shelves).map(([slug,s])=>({title:s.title,subtitle:s.description,href:`/${slug}`})),{title:'Tech stack & tools',subtitle:'TypeScript JavaScript Python React Next.js FastAPI Supabase Git',href:'/#stack'},{title:'Open source',subtitle:'GitHub contributions merged open closed pull requests peer reviews',href:'/#open-source'},{title:'Activity',subtitle:'LeetCode Codeforces CodeChef contest history accepted problems streak calendar',href:'/activity'},{title:'Highlights',subtitle:'Achievements scholarships contributions and personal milestones',href:'/#highlights'}],{headers:{'Cache-Control':'public, s-maxage=300, stale-while-revalidate=600'}});
 }

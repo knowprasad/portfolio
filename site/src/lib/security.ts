@@ -14,7 +14,7 @@ export function securityHeaders(production: boolean) {
     "default-src 'self'", "base-uri 'none'", "object-src 'none'", "frame-ancestors 'none'", "frame-src 'none'",
     `script-src 'self' 'unsafe-inline'${production ? '' : " 'unsafe-eval'"}`, "script-src-attr 'none'",
     "style-src 'self' 'unsafe-inline'", "font-src 'self'",
-    "img-src 'self' data: https://github.com https://avatars.githubusercontent.com https://raw.githubusercontent.com https://user-images.githubusercontent.com https://img.shields.io https://prod-files-secure.s3.us-west-2.amazonaws.com https://s3.us-west-2.amazonaws.com https://images.unsplash.com",
+    "img-src 'self' data: https://github.com https://avatars.githubusercontent.com https://raw.githubusercontent.com https://user-images.githubusercontent.com https://img.shields.io https://prod-files-secure.s3.us-west-2.amazonaws.com https://s3.us-west-2.amazonaws.com https://images.unsplash.com https://covers.openlibrary.org https://archive.org https://*.archive.org https://upload.wikimedia.org https://thumb.wikimedia.org https://substackcdn.com https://substack-post-media.s3.amazonaws.com https://miro.medium.com https://cdn.hashnode.com https://media2.dev.to https://yt3.googleusercontent.com",
     `connect-src 'self' https://formspree.io${production ? '' : ' ws://127.0.0.1:3001 ws://localhost:3001'}`,
     "media-src 'self'", "form-action 'self' https://formspree.io https://hhbuhqevmskpuvybiwii.supabase.co https://accounts.google.com",
     ...(production ? ['upgrade-insecure-requests'] : []),

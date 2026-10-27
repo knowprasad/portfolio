@@ -3881,17 +3881,6 @@ dialog { box-shadow:var(--shadow-dialog); }
 .shelf-caption strong { display:block; font-size:14px; line-height:1.4; font-weight:500; }
 .shelf-caption small { display:block; color:var(--muted); font-size:13px; line-height:1.45; margin-top:3px; }
 .shelf-caption>svg { color:var(--dim); flex-shrink:0; margin-bottom:4px; }
-.book-fan { position:relative; width:100%; height:260px; }
-.book-fan>span { position:absolute; width:115px; height:166px; top:47px; left:calc(50% - 57px); display:flex; flex-direction:column; justify-content:space-between; padding:16px 12px; border-radius:6px; border:1px solid #ffffff14; background:#26232e; color:#ddd7ec; box-shadow:0 8px 24px -8px #0007; transform-origin:50% 100%; transition:transform .3s cubic-bezier(.23,1,.32,1); overflow:hidden; }
-.book-fan>span:nth-child(1) { transform:translateX(-45px) rotate(-8deg); background:#24332e; color:#d3e0d6; }
-.book-fan>span:nth-child(2) { z-index:1; }
-.book-fan>span:nth-child(3) { transform:translateX(45px) rotate(8deg); background:#44362c; color:#f0dfcd; }
-.book-fan b { font-size:21px; font-weight:500; letter-spacing:-.6px; }
-.book-fan small { font:11px var(--font-mono); text-transform:uppercase; letter-spacing:2px; }
-.book-fan img { position:absolute; inset:0; object-fit:cover; width:100%; height:100%; }
-.shelf-books:is(:hover,:focus-visible) .book-fan>span:nth-child(1) { transform:translateX(-75px) rotate(-13deg); }
-.shelf-books:is(:hover,:focus-visible) .book-fan>span:nth-child(2) { transform:translateY(-8px); }
-.shelf-books:is(:hover,:focus-visible) .book-fan>span:nth-child(3) { transform:translateX(75px) rotate(13deg); }
 .watch-art { display:flex; gap:8px; padding:0; min-height:140px; background:transparent; }
 .watch-art>span { display:grid; place-items:center; flex:1; min-height:140px; border-radius:12px; background:#25212e; color:#a598b8; border:1px solid #ffffff0d; }
 .watch-art>span+span { background:#23302d; color:#97ada4; }
@@ -3925,7 +3914,7 @@ dialog { box-shadow:var(--shadow-dialog); }
 .public-messages blockquote { margin:0; padding:16px; border:1px solid var(--message-border); border-radius:2px 16px 16px; background:var(--message-surface); font-size:14px; color:var(--message-text); transition:background-color .15s; }.public-messages blockquote p { margin:0; white-space:pre-wrap; }
 .message-view-all { display:flex; justify-content:center; margin-top:32px; }.message-empty-hint { margin-top:24px; font-size:13px; color:var(--dim); text-align:center; }.own-messages { margin-top:40px; }.own-messages>div { padding:18px 0; border-bottom:1px solid var(--line); }.own-messages small { color:var(--dim); }.own-messages form { margin-top:8px; }.section-eyebrow { color:var(--dim); font-size:14px; display:block; margin-bottom:8px; }
 @media(max-width:600px) { .personal-shelves { grid-template-columns:repeat(2,minmax(0,1fr)); }.personal-shelf { grid-column:span 1; }.shelf-books { grid-column:span 2; grid-row:auto; }.shelf-books .shelf-art { min-height:260px; }.shelf-articles { grid-column:span 2; }.watch-art>span { min-height:128px; }.writing-row { gap:10px; }.writing-date { font-size:11px; }.message-sign-in { padding:30px 18px; }.message-sign-in p { font-size:14px; }.public-messages>li { gap:10px; }.public-messages>li>.message-initial { width:32px; height:32px; }.message-byline { flex-wrap:wrap; }.public-messages blockquote { padding:12px; } }
-@media(prefers-reduced-motion:reduce) { .personal-shelf,.book-fan>span { transition:none; }.personal-shelf:active { transform:none; } }
+@media(prefers-reduced-motion:reduce) { .personal-shelf { transition:none; }.personal-shelf:active { transform:none; } }
 
 #leave-message .section-heading h2 { font-family:var(--font-body),sans-serif; }
 .message-sign-in .google-sign-in { margin-top:0; }
@@ -4078,3 +4067,8 @@ main#main { scroll-margin-top: 110px; }
 .search-recovery button { min-height:44px; padding:8px 12px; color:var(--ink); border:1px solid var(--line); border-radius:8px; }
 .project-archive-header { width:min(640px,calc(100% - 40px)); gap:20px; }
 .project-archive-header .header-actions { flex-shrink:0; }
+.shelf-article-covers { position:relative; width:210px; height:145px; }
+.shelf-article-covers img { position:absolute; width:160px; height:100px; object-fit:cover; border-radius:7px; }
+.shelf-article-covers img:nth-child(1) { left:2px; top:2px; transform:rotate(-8deg); }
+.shelf-article-covers img:nth-child(2) { left:32px; top:24px; transform:rotate(6deg); }
+.shelf-article-covers img:nth-child(3) { left:15px; top:44px; transform:rotate(-2deg); }

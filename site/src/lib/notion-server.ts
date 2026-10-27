@@ -2,6 +2,9 @@ import 'server-only';
 import { cache } from 'react';
 import { unstable_cache } from 'next/cache';
 import sources from '@/data/notion-sources.json';
+import {belongsToCollection,collectionPhotos} from './collection-gallery';
+import type {CollectionKind} from './collection-browser';
+import {collectionSlug,collectionImage} from './collection-content';
 import { normalizePublishedPage, publicUrl, publicImageUrl, type ContentBlock, type ContentEntry, type RichText } from './content-model';
 
 export type ContentSource = keyof typeof sources;
@@ -26,7 +29,7 @@ const publishedSource = unstable_cache(async (source: ContentSource): Promise<Co
     cursor = result.next_cursor;
   }
   return entries;
-}, ['portfolio-published-content-v2'], { revalidate: 300, tags: ['portfolio-content'] });
+}, ['portfolio-published-content-v4'], { revalidate: 300, tags: ['portfolio-content'] });
 export const getContent = cache(async (source: ContentSource): Promise<ContentEntry[] | null> => {
   if (!notionReady()) return null;
   try { return await publishedSource(source); } catch { return null; }
@@ -65,3 +68,19 @@ export async function getProjectBody(slug: string) {
   if(!project)return [];
   try { return await publishedBody(project.id); } catch { return []; }
 }
+export async function getCollectionGallery(kind:CollectionKind,id:string) {
+  const entries=await getContent(kind==='places'?'places':'library');
+  if(entries===null) throw new Error('Collection unavailable');
+  const entry=entries.find(e=>e.id===id&&belongsToCollection(e,kind));
+  if(!entry)return null;
+  // Membership is checked before fetching blocks; arbitrary/private IDs are never read.
+  return collectionPhotos(await publishedBody(entry.id));
+}
+export const getCollectionNote=cache(async(kind:CollectionKind,slug:string)=>{
+  const entries=await getContent(kind==='places'?'places':'library');
+  const matches=entries?.filter(e=>belongsToCollection(e,kind)&&(collectionSlug(e)===slug||e.id===slug))||[];
+  if(matches.length!==1)return null;
+  const entry=matches[0];
+  function localImages(items:ContentBlock[]):ContentBlock[]{return items.map(block=>({...block,url:block.type==='image'?collectionImage(block.url):block.url,children:localImages(block.children)}));}
+  try{return {entry,blocks:localImages(await publishedBody(entry.id)),unavailable:false};}catch{return {entry,blocks:[],unavailable:true};}
+});
