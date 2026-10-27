@@ -4,7 +4,7 @@ const enquiry = `mailto:${profile.email}?subject=${encodeURIComponent('Portfolio
 
 export function PortfolioService() {
   return <div className="footer-service" id="build-portfolio">
-    <h2><a href={enquiry}>Want a portfolio like this? <span aria-hidden="true">↗</span></a></h2>
-    <p>I build personal websites for students and developers, shaped around your projects, identity and goals.</p>
+    <h2>Want a portfolio like this?</h2>
+    <div className="footer-service-links"><a href={enquiry}>Email me <span aria-hidden="true">↗</span></a><a href={profile.booking} target="_blank" rel="noreferrer">Book a call <span aria-hidden="true">↗</span></a></div>
   </div>;
 }
