@@ -364,8 +364,6 @@ The homepage bookshelf shows up to **four upright books on a shelf**. Each book 
 
 ## Portfolio-service inquiries
 
-A small hero link opens the service section after Writing. It displays starting prices only (India ₹2,000 / international $79) and links to email and Cal.com. These are code-level offer settings in src/components/portfolio-service.tsx; ordinary Notion profile edits do not change them. Update the website, LinkedIn Services description and customer offer sheet together when prices change.
+The service mention is a small email inquiry at the end of the footer, anchored at #build-portfolio. There is no hero promotion, standalone sales section or public pricing on the portfolio. Edit its copy in src/components/portfolio-service.tsx only after owner approval; Notion profile edits do not change it. Pricing and the public LinkedIn Services listing are separate, so this website-only change does not alter the agreed package rates or LinkedIn description.
 
-The email link opens the visitor's mail app with an inquiry outline; it does not submit a database form. Booking opens the existing Cal.com page. No new payment processor, lead database or analytics integration was added. LinkedIn Services is a separate public listing at https://www.linkedin.com/services/page/94075534818120967a/.
-
-Business documents and the local launch-post draft are under C:/PROJECTS/Templates/Portfolio Website/docs. The owner explicitly paused starter development to validate demand and explicitly prohibited publishing/scheduling the LinkedIn launch post. Existing starter drafts are not a finished customer deliverable.
+The link opens the visitor’s email app with an inquiry outline; it does not submit a database form. No payment processor, lead database or new analytics integration was added. Business documents and the local launch-post draft are under C:/PROJECTS/Templates/Portfolio Website/docs. Starter development is paused pending demand validation, and publishing/scheduling the LinkedIn launch post is explicitly prohibited.
