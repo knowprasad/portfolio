@@ -4072,3 +4072,22 @@ main#main { scroll-margin-top: 110px; }
 .shelf-article-covers img:nth-child(1) { left:2px; top:2px; transform:rotate(-8deg); }
 .shelf-article-covers img:nth-child(2) { left:32px; top:24px; transform:rotate(6deg); }
 .shelf-article-covers img:nth-child(3) { left:15px; top:44px; transform:rotate(-2deg); }
+/* Time-of-day palettes override neutrals only; manual modes keep their existing tokens. */
+:root[data-theme-phase=morning] { --paper:#fff8f4; --panel:#f7eee8; --ink:#292421; --muted:#665a54; }
+:root[data-theme-phase=day] { --paper:#f7fafd; --panel:#edf2f7; --ink:#202833; --muted:#536173; }
+:root[data-theme-phase=evening] { --paper:#f3f0f8; --panel:#e9e4f0; --ink:#292432; --muted:#62596d; }
+:root[data-theme-phase=night] { --paper:#10151e; --panel:#19212d; --ink:#e7ebf2; --muted:#abb5c5; }
+:root[data-theme-phase]:not([data-theme-phase=""]) { --surface:var(--panel); --accent:var(--ink); --dim:var(--muted); --pr-surface:var(--panel); --message-surface:var(--panel); --message-text:var(--muted); --message-border:var(--line); }
+:root[data-theme-phase]:not([data-theme-phase=""]) .personal-shelf { background:var(--panel); }
+:root[data-theme-phase]:not([data-theme-phase=""]) .personal-shelf:hover { background:var(--hover); }
+.theme-control { position:relative; }
+.theme-menu { position:absolute; right:0; top:calc(100% + 12px); width:245px; max-width:calc(100vw - 32px); padding:6px; border:1px solid var(--line); border-radius:14px; background:var(--paper); box-shadow:var(--shadow-float); z-index:100; }
+.theme-choices { display:grid; gap:3px; }
+.theme-choices button { display:flex; align-items:center; gap:11px; width:100%; min-height:48px; padding:10px 12px; text-align:left; border-radius:9px; font-size:14px; color:var(--ink); }
+.theme-choices button:hover,.theme-choices button[aria-checked=true],.theme-choices button[aria-pressed=true] { background:var(--panel); }
+.theme-choices button:focus-visible { outline:2px solid var(--ink); outline-offset:-2px; }
+.theme-choices button>svg { flex-shrink:0; }
+.theme-choices small { display:block; margin-top:2px; font-size:12px; line-height:1.5; color:var(--muted); }
+.theme-selected { margin-left:auto; min-width:16px; }
+.theme-control .theme-key { min-width:44px; min-height:44px; }
+.dock-dialog.mode-theme .theme-choices { padding:12px; }

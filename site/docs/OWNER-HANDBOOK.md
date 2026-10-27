@@ -261,7 +261,7 @@ Book a call links to your Cal.com page. Manage available times, duration and cal
 
 Email and Copy labels hide the address in the layout, but a mailto link remains publicly discoverable. The contact dock opens a draft in the visitor's email application unless a separate Formspree form has been configured. A mail draft is not a server-confirmed delivered message. Do not assume an email was sent simply because a mail application opened.
 
-Theme and sound choices are saved in that browser. Sound starts off; the visitor must enable it. Browsers may restrict audio until a user gesture. Reduced-motion preferences shorten/disable nonessential animation. The circular theme transition uses browser support when available and falls back to a normal theme switch.
+Theme and sound choices are saved in that browser. Theme offers Auto, Light and Dark in the header menu and searchable dock. New visitors start in Auto; previous Light/Dark choices remain respected. Auto uses the visitor’s local clock: morning 06:00–10:59 (peach white), day 11:00–16:59 (cool white), evening 17:00–20:59 (lavender white), night 21:00–05:59 (blue charcoal). The phase stays fixed while browsing; reload or select Auto again to reassess it. Manual Light and Dark keep the monochrome palettes. No location permission or external service is used. Sound starts off; the visitor must enable it. Browsers may restrict audio until a user gesture. Reduced-motion preferences shorten/disable nonessential animation. The circular theme transition uses browser support when available and falls back to a normal theme switch.
 
 ## 18. Search, SEO and discovery
 

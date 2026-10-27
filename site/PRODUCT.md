@@ -32,3 +32,7 @@ See references/IMPLEMENTATION-AUDIT.md for actual delivery/verification status a
 - Homepage problem solving shows combined platform solves, rated contests and known best streak with an Explore activity link to /activity; the complete All/LeetCode/Codeforces/CodeChef dashboard lives on that route.
 - Open source begins with a few actual merged upstream PRs across repositories, followed by full filters, contribution context and the calendar.
 - Every project detail page keeps its explicit status and preview, with public repository README content as the primary documentation. Published Notion body content provides optional ownership, architecture and limitation notes. Empty ownership/architecture sections are omitted when README content is available; missing repository documentation keeps the curated fallback page usable. Source reads are public, credential-free and cached for 15 minutes.
+
+## Automatic appearance
+
+Theme choices are Auto / Light / Dark, shared by the header menu and dock. Auto is the default only for visitors without a valid saved preference; keep existing manual choices. Use visitor-local clock windows 06–11 morning, 11–17 day, 17–21 evening, 21–06 night, with subtle peach/cool-white/lavender/blue-charcoal palettes. Resolve before paint and freeze during document navigation; only a full load or explicit Auto selection reassesses time. Manual choices retain monochrome palettes and deliberate changes retain the circular reveal with reduced-motion fallback. No location permission, timer, external API or new dependency.
