@@ -1,10 +1,13 @@
 'use client';
 import Image from 'next/image';
-import Link from 'next/link';
 import {useEffect,useRef,useState} from 'react';
 import type {CollectionItem,CollectionKind} from '@/lib/collection-browser';
 import type {CollectionPhoto} from '@/lib/collection-gallery';
 import styles from './collection-browser.module.css';
+export function EntryGallery({item,kind}:{item:CollectionItem;kind:CollectionKind}) {
+  const [open,setOpen]=useState(false);
+  return <><button className={styles.galleryButton} type="button" onClick={()=>setOpen(true)}>View photos</button>{open&&<CollectionGallery item={item} kind={kind} onClose={()=>setOpen(false)}/>}</>;
+}
 export function CollectionGallery({item,kind,onClose}:{item:CollectionItem;kind:CollectionKind;onClose:()=>void}) {
   const dialog=useRef<HTMLDialogElement>(null);
   const [photos,setPhotos]=useState<CollectionPhoto[]>(item.image?[{src:item.image,caption:item.imageCredit,source:item.imageSource}]:[]);
@@ -21,6 +24,6 @@ export function CollectionGallery({item,kind,onClose}:{item:CollectionItem;kind:
     {item.summary&&<p className={styles.gallerySummary}>{item.summary}</p>}
     {item.note&&<section className={styles.note}><h3>My take</h3><p>{item.note}</p></section>}{state==='loading'&&photo&&<p className={styles.galleryNotice} role="status">Checking for more photos…</p>}
     {state==='error'&&<p className={styles.galleryNotice} role="status">Extra photos couldn’t load. <button type="button" onClick={()=>{setState('loading');setAttempt(value=>value+1);}}>Retry</button></p>}
-    <Link prefetch={false} className={styles.galleryLink} href={item.path||`/${kind}/${item.id}`}>Open full note →</Link> {item.url&&<a className={styles.galleryLink} href={item.url} target="_blank" rel="noreferrer">{kind==='places'?'Open map':'Visit original'} ↗</a>}
+    {item.url&&<a className={styles.galleryLink} href={item.url} target="_blank" rel="noreferrer">{kind==='places'?'Open map':'Visit original'} ↗</a>}
   </dialog>;
 }
