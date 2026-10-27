@@ -4091,3 +4091,16 @@ main#main { scroll-margin-top: 110px; }
 .theme-selected { margin-left:auto; min-width:16px; }
 .theme-control .theme-key { min-width:44px; min-height:44px; }
 .dock-dialog.mode-theme .theme-choices { padding:12px; }
+.hero-service-link { display:inline-flex; align-items:center; gap:6px; min-height:44px; margin-top:12px; color:var(--muted); font-size:13px; text-decoration:underline; text-underline-offset:4px; text-decoration-color:var(--line); }
+.hero-service-link:hover { color:var(--ink); text-decoration-color:var(--muted); }
+.portfolio-service { padding:22px; border:1px solid var(--line); border-radius:16px; background:var(--panel); }
+.portfolio-service>p:first-child { font-size:16px; line-height:1.8; max-width:55ch; }
+.portfolio-service ul { display:flex; flex-wrap:wrap; gap:8px 20px; list-style:none; padding:0; margin:18px 0; color:var(--muted); font-size:13px; }
+.portfolio-service li { display:flex; align-items:center; gap:8px; }
+.portfolio-service li::before { content:''; width:4px; height:4px; border-radius:50%; background:var(--muted); }
+.portfolio-service-price { font-size:13px; line-height:1.8; color:var(--muted); }
+.portfolio-service-price strong { font-weight:500; color:var(--ink); }
+.portfolio-service-price>span { margin-inline:5px; }
+.portfolio-service-actions { display:flex; flex-wrap:wrap; align-items:center; gap:8px 20px; margin-top:20px; }
+.portfolio-service-actions a { min-height:44px; }
+@media(max-width:480px) { .portfolio-service { padding:18px; }.portfolio-service ul { flex-direction:column; gap:9px; } }

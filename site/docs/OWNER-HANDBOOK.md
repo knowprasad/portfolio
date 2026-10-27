@@ -361,3 +361,11 @@ Use **Portfolio CMS → Personal library** for books, saved articles/papers, mov
 The starter import contains three books, five favourite watchlist entries, five places and nine linked Substack articles. Add your own channel picks later; an empty channel shelf does not invent recommendations.
 
 The homepage bookshelf shows up to **four upright books on a shelf**. Each book opens its own diary page directly; the Bookshelf caption opens the full grid. Feature and order the cover images to select the books. Full notes are not prefetched merely because their links appear on the homepage. The rest of the Off the Clock collage keeps its existing layout.
+
+## Portfolio-service inquiries
+
+A small hero link opens the service section after Writing. It displays starting prices only (India ₹2,000 / international $79) and links to email and Cal.com. These are code-level offer settings in src/components/portfolio-service.tsx; ordinary Notion profile edits do not change them. Update the website, LinkedIn Services description and customer offer sheet together when prices change.
+
+The email link opens the visitor's mail app with an inquiry outline; it does not submit a database form. Booking opens the existing Cal.com page. No new payment processor, lead database or analytics integration was added. LinkedIn Services is a separate public listing at https://www.linkedin.com/services/page/94075534818120967a/.
+
+Business documents and the local launch-post draft are under C:/PROJECTS/Templates/Portfolio Website/docs. The owner explicitly paused starter development to validate demand and explicitly prohibited publishing/scheduling the LinkedIn launch post. Existing starter drafts are not a finished customer deliverable.

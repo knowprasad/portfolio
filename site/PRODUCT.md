@@ -36,3 +36,7 @@ See references/IMPLEMENTATION-AUDIT.md for actual delivery/verification status a
 ## Automatic appearance
 
 Theme choices are Auto / Light / Dark, shared by the header menu and dock. Auto is the default only for visitors without a valid saved preference; keep existing manual choices. Use visitor-local clock windows 06–11 morning, 11–17 day, 17–21 evening, 21–06 night, with subtle peach/cool-white/lavender/blue-charcoal palettes. Resolve before paint and freeze during document navigation; only a full load or explicit Auto selection reassesses time. Manual choices retain monochrome palettes and deliberate changes retain the circular reveal with reduced-motion fallback. No location permission, timer, external API or new dependency.
+
+## Portfolio service offer
+
+Owner-approved 27 October 2026: a secondary hero link leads to a portfolio-building service section after Writing. Preserve the recruiter-facing hero and section order. Display starting prices only: ₹2,000 India / $79 international; inquiries use email and the existing Cal.com link. Do not invent clients, testimonials, hiring outcomes, limited availability or business metrics. Full package documentation and the customer-neutral starter live separately in C:/PROJECTS/Templates/Portfolio Website. Optional Notion editing is an upgrade; do not add a payment platform, sales backend or new provider account for this inquiry path.
