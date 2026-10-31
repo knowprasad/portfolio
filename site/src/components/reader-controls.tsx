@@ -4,9 +4,9 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import styles from './reader.module.css';
 
-export function ReaderCode({ text, language }: { text: string; language?: string }) {
+export function ReaderCode({ text, language, ariaLabel = 'Code example' }: { text: string; language?: string; ariaLabel?: string }) {
   const [notice, setNotice] = useState('');
-  return <div className={styles.code}><div className={styles.codeBar}><span>{language || 'text'}</span><button type="button" onClick={async () => { try { await navigator.clipboard.writeText(text); setNotice('Copied'); } catch { setNotice('Copy unavailable'); } }}>Copy<span className={styles.srOnly}> code</span></button><span role="status">{notice}</span></div><pre tabIndex={0} role="group" aria-label="Code example"><code>{text}</code></pre></div>;
+  return <div className={styles.code}><div className={styles.codeBar}><span>{language || 'text'}</span><button type="button" onClick={async () => { try { await navigator.clipboard.writeText(text); setNotice('Copied'); } catch { setNotice('Copy unavailable'); } }}>Copy<span className={styles.srOnly}> code</span></button><span role="status">{notice}</span></div><pre tabIndex={0} role="group" aria-label={ariaLabel}><code>{text}</code></pre></div>;
 }
 
 export function ReaderImage({ src, alt, caption, priority = false }: { src: string; alt: string; caption?: string; priority?: boolean }) {

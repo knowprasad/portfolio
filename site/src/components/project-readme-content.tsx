@@ -17,7 +17,7 @@ export function ProjectReadmeContent({ readme }: { readme: ProjectReadme }) {
       const text = code?.type === 'element' ? code.children.map(child => child.type === 'text' ? child.value : '').join('') : '';
       const className = code?.type === 'element' && typeof code.properties.className === 'string' ? code.properties.className : '';
       const language = className.match(/language-([\w+-]+)/)?.[1];
-      return text ? <ReaderCode text={text} language={language}/> : <pre tabIndex={0} role="group" aria-label="Scrollable code example">{children}</pre>;
+      return text ? <ReaderCode text={text} language={language} ariaLabel="Scrollable code example"/> : <pre tabIndex={0} role="group" aria-label="Scrollable code example">{children}</pre>;
     },
     table: ({ children }) => <div className="article-table" tabIndex={0} role="group" aria-label="Scrollable repository table"><table>{children}</table></div>,
   }}>{readme.markdown}</Markdown></section>;
