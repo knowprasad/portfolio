@@ -1,5 +1,26 @@
 import type { Root, RootContent } from 'hast';
 
+export type ReadmeHeading = { id: string; title: string; depth: number };
+
+export function readmeHeadings(markdown: string): ReadmeHeading[] {
+  const counts = new Map<string, number>();
+  let fence: string | undefined;
+  const headings: ReadmeHeading[] = [];
+  for (const line of markdown.split(/\r?\n/)) {
+    const fenceMatch = line.match(/^\s{0,3}(`{3,}|~{3,})/);
+    if (fenceMatch) { fence = fence ? undefined : fenceMatch[1][0]; continue; }
+    if (fence) continue;
+    const match = line.match(/^\s{0,3}(#{1,6})\s+(.+?)\s*#*\s*$/);
+    if (!match) continue;
+    const title = match[2].replace(/\\([\\`*_{}\[\]()#+.!<>|~-])/g, '$1').replace(/[`*_~]/g, '').replace(/!?\[([^\]]+)\]\([^)]*\)/g, '$1').trim();
+    const slug = title.toLowerCase().replace(/[^\p{L}\p{N}_\-\s]/gu, '').trim().replace(/\s/g, '-') || 'section';
+    const occurrence = counts.get(slug) || 0;
+    counts.set(slug, occurrence + 1);
+    headings.push({ id: `readme-${slug}${occurrence ? `-${occurrence}` : ''}`, title, depth: match[1].length });
+  }
+  return headings;
+}
+
 // Runs after HTML sanitization. Namespace IDs away from site controls and keep
 // Markdown headings inside the README section's h2 without skipping levels.
 export function rehypeReadme() {

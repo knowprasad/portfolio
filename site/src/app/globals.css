@@ -3984,6 +3984,13 @@ main#main { scroll-margin-top: 110px; }
 
 .readme-source { display:flex; flex-wrap:wrap; gap:6px 16px; font:13px/1.6 var(--font-mono),monospace; color:var(--muted); margin:12px 0 28px; }
 .readme-source a { overflow-wrap:anywhere; }
+.readme-toc { margin:24px 0 30px; padding:0 0 16px; border-bottom:1px solid var(--line); }
+.readme-toc summary { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:44px; color:var(--ink); cursor:pointer; font-size:14px; font-weight:500; }
+.readme-toc summary span { color:var(--muted); font:11px/1.5 var(--font-mono),monospace; }
+.readme-toc nav { display:grid; gap:4px; margin-top:8px; }
+.readme-toc nav a { display:block; min-height:36px; padding:7px 0; color:var(--muted); font-size:14px; line-height:1.5; text-decoration:none; }
+.readme-toc nav a:hover,.readme-toc nav a:focus-visible { color:var(--ink); text-decoration:underline; text-underline-offset:3px; }
+.readme-toc nav a.readme-toc-nested { padding-left:16px; font-size:13px; }
 .readme-document { overflow-wrap:anywhere; }
 .readme-document img { max-width:100%; height:auto; vertical-align:middle; }
 .readme-document pre { max-width:100%; overflow-x:auto; }
