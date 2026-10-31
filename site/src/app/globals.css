@@ -4002,6 +4002,7 @@ main#main { scroll-margin-top: 110px; }
 .project-case-study { width:min(640px,100%); margin-inline:auto; }
 .project-case-study .project-page-heading { display:flex; align-items:center; gap:14px; margin:0; font-size:32px; line-height:1.2; letter-spacing:-.025em; text-wrap:balance; }
 .project-case-study .project-page-heading img,.project-case-study .project-page-heading svg { flex:0 0 auto; }
+.project-overview-label { margin:20px 0 -10px; color:var(--muted); font:11px/1.6 var(--font-mono),monospace; letter-spacing:.04em; text-transform:uppercase; }
 .project-case-study .page-intro { max-width:58ch; margin:16px 0 24px; font-size:16px; line-height:1.65; }
 .project-case-study .project-section-nav { gap:6px 16px; margin:24px 0 34px; padding:12px 0; border-block:1px solid var(--line); }
 .project-case-study .project-section-nav a { min-height:36px; display:inline-flex; align-items:center; padding:5px 0; border:0; border-radius:0; font-size:13px; text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:4px; }
@@ -4018,12 +4019,14 @@ main#main { scroll-margin-top: 110px; }
 .project-case-study .readme-document li+li { margin-top:.45em; }
 .project-case-study .readme-document pre { margin:1.4em 0; padding:16px; font-size:13px; line-height:1.65; }
 .project-case-study .readme-document blockquote { margin:1.4em 0; }
+.project-nav-hint { display:none; }
 @media(max-width:600px) {
   .project-case-study { padding-top:28px; }
   .project-case-study .project-page-heading { gap:10px; font-size:27px; }
   .project-case-study .project-page-heading svg,.project-case-study .project-page-heading img { width:34px; height:34px; }
   .project-case-study .project-section-nav { flex-wrap:nowrap; overflow-x:auto; overscroll-behavior-inline:contain; scrollbar-width:thin; gap:0 18px; margin:18px calc(-1 * var(--page-gutter, 20px)) 26px; padding:8px var(--page-gutter, 20px); scroll-snap-type:x proximity; }
   .project-case-study .project-section-nav a { flex:0 0 auto; min-height:44px; scroll-snap-align:start; white-space:nowrap; }
+  .project-case-study .project-nav-hint { display:block; margin:-18px 0 24px; color:var(--muted); font-size:12px; line-height:1.5; }
   .project-case-study .project-detail-section { margin:24px 0; padding-top:20px; font-size:16px; line-height:1.75; }
   .project-case-study .project-detail-section h2 { font-size:22px; }
   .project-case-study .project-detail-section .readme-document { font-size:16px; }
