@@ -3998,6 +3998,38 @@ main#main { scroll-margin-top: 110px; }
 .readme-document th { text-align:left; border:1px solid var(--line); padding:8px 12px; }
 .readme-task-state { display:inline-block; min-width:22px; color:var(--ink); }
 
+/* Project detail pages use the same calm reading measure as long-form articles. */
+.project-case-study { width:min(640px,100%); margin-inline:auto; }
+.project-case-study .project-page-heading { display:flex; align-items:center; gap:14px; margin:0; font-size:32px; line-height:1.2; letter-spacing:-.025em; text-wrap:balance; }
+.project-case-study .project-page-heading img,.project-case-study .project-page-heading svg { flex:0 0 auto; }
+.project-case-study .page-intro { max-width:58ch; margin:16px 0 24px; font-size:16px; line-height:1.65; }
+.project-case-study .project-section-nav { gap:6px 16px; margin:24px 0 34px; padding:12px 0; border-block:1px solid var(--line); }
+.project-case-study .project-section-nav a { min-height:36px; display:inline-flex; align-items:center; padding:5px 0; border:0; border-radius:0; font-size:13px; text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:4px; }
+.project-case-study .project-section-nav a:hover,.project-case-study .project-section-nav a:focus-visible { background:transparent; text-decoration-color:var(--muted); }
+.project-case-study .project-detail-section { padding-top:26px; margin:30px 0; border-top:1px solid var(--line); font-size:17px; line-height:1.75; }
+.project-case-study .project-detail-section h2 { margin:0 0 16px; font-size:24px; line-height:1.3; letter-spacing:-.02em; }
+.project-case-study .project-detail-section p,.project-case-study .project-detail-section li { line-height:1.75; }
+.project-case-study .project-detail-section .readme-document { font-size:17px; line-height:1.75; }
+.project-case-study .readme-document h1,.project-case-study .readme-document h2,.project-case-study .readme-document h3 { line-height:1.35; text-wrap:balance; margin-top:1.8em; margin-bottom:.65em; }
+.project-case-study .readme-document h1 { font-size:28px; }
+.project-case-study .readme-document h2 { font-size:23px; }
+.project-case-study .readme-document h3 { font-size:19px; }
+.project-case-study .readme-document p,.project-case-study .readme-document ul,.project-case-study .readme-document ol { margin-block:1em; }
+.project-case-study .readme-document li+li { margin-top:.45em; }
+.project-case-study .readme-document pre { margin:1.4em 0; padding:16px; font-size:13px; line-height:1.65; }
+.project-case-study .readme-document blockquote { margin:1.4em 0; }
+@media(max-width:600px) {
+  .project-case-study { padding-top:28px; }
+  .project-case-study .project-page-heading { gap:10px; font-size:27px; }
+  .project-case-study .project-page-heading svg,.project-case-study .project-page-heading img { width:34px; height:34px; }
+  .project-case-study .project-section-nav { gap:4px 14px; margin:20px 0 28px; }
+  .project-case-study .project-detail-section { margin:24px 0; padding-top:22px; font-size:16px; }
+  .project-case-study .project-detail-section h2 { font-size:22px; }
+  .project-case-study .project-detail-section .readme-document { font-size:16px; }
+  .project-case-study .readme-document h1 { font-size:25px; }
+  .project-case-study .readme-document h2 { font-size:21px; }
+}
+
 /* Writing: date-first headline rows and a quiet breadcrumb. */
 .writing-header { width:min(880px,calc(100% - 40px)); gap:20px; }
 .writing-breadcrumb { display:flex; gap:10px; align-items:center; min-width:0; color:var(--muted); font:12px/1.6 var(--font-mono),monospace; }
